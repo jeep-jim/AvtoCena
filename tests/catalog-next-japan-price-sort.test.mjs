@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {JAPAN_PRICE_SORT_GATES, checkedJapanPriceSortCursor, japanPriceSortApi, japanPriceSortApiAllowed,
   japanPriceSortPageApi, japanPriceSortSelectionUrl, verifyJapanPriceSortRows, verifyJapanPriceSortCount,
-  selectJapanPowerBeforePriceSort, selectJapanPriceSort} from '../scripts/catalog-next/japan-price-sort-browser.mjs';
+  verifyJapanPriceSortVisible, selectJapanPowerBeforePriceSort, selectJapanPriceSort} from '../scripts/catalog-next/japan-price-sort-browser.mjs';
 
 const CITY = 'Новокузнецк', ORIGIN = 'https://avtocena.com';
 const cursor = (page = 2) => 'j2.k.2.0.' + page + '.' + '1'.repeat(64) + '.' + '2'.repeat(64) + '.-';
@@ -120,6 +120,54 @@ test('visible partial count follows loaded rows and never turns supplier upper b
     {loaded: 12, total: 12, hasMore: false}));
   assert.throws(() => verifyJapanPriceSortCount({status: 'exact', loadedCount: '24', exactCount: '24', text: '24'},
     {loaded: 24, total: 24, hasMore: true}), /false_exact_count/);
+});
+
+/** Execute the actual browser-side ID readers against DOM-shaped cards. The
+ * legacy locator is modelled too, so the overlapping-ID regression fails on
+ * the old helper with the same 11-card strict-mode collision as Chromium. */
+function visibleCards(hrefs) {
+  const nodes = hrefs.map(href => ({href, querySelectorAll(selector) {
+    assert.equal(selector, 'a[href]');
+    // The image and title can both link to the same offer within one card.
+    return [1, 2].map(() => ({getAttribute: name => name === 'href' ? href : null}));
+  }}));
+  const cards = {
+    nth: index => ({waitFor: async () => assert(nodes[index])}),
+    filter: ({has}) => ({waitFor: async () => assert.equal(nodes.filter(node => node.href.includes(has.token)).length, 1,
+      'strict card wait must identify one offer, not every longer ID with the same prefix')}),
+    evaluateAll: async (reader, expected) => reader(nodes, expected),
+  };
+  const badge = {waitFor: async () => {}, count: async () => 1,
+    locator: () => ({count: async () => 0}),
+    getAttribute: async name => ({'data-japan-count-status': 'partial', 'data-japan-loaded-count': String(nodes.length)})[name] ?? null,
+    innerText: async () => 'Загружено ' + nodes.length + ' · количество уточняется'};
+  const catalog = {locator: selector => selector.startsWith('article.') ? cards : badge,
+    getByText: text => ({count: async () => text instanceof RegExp ? 1 : 0, isVisible: async () => true})};
+  return {locator(selector) {
+    if (selector === 'main.ac-ajes-catalog') return catalog;
+    const token = /^a\[href\*="([^"]+)"\]$/.exec(selector)?.[1];
+    assert(token, selector); return {token};
+  }, async waitForFunction(predicate, input) {
+    const previous = globalThis.document;
+    globalThis.document = {querySelector: selector => {
+      assert.equal(selector, 'main.ac-ajes-catalog'); return {querySelectorAll: () => nodes};
+    }};
+    try { assert.equal(predicate(input), true, 'exact offer membership must become ready'); }
+    finally { if (previous === undefined) delete globalThis.document; else globalThis.document = previous; }
+  }};
+}
+
+test('visible card waits distinguish ID 1 from 10–19 at every real offer path boundary', async () => {
+  const items = Array.from({length: 24}, (_, index) => row('sort-1-' + index, 1_000_000 + index));
+  const endings = ['', '/toyota-test-2022', '?city=' + encodeURIComponent(CITY), '#price'];
+  const hrefs = items.map((item, index) => (index % 2 ? ORIGIN : '') + '/cars/offer/' + item.id + endings[index % endings.length]);
+  assert.equal(hrefs.filter(href => href.includes('ajes-stats-sort-1-1')).length, 11);
+  const proof = await verifyJapanPriceSortVisible(visibleCards(hrefs), items, {total: null, hasMore: true});
+  assert.equal(proof.rowOrderMatchesApi, true); assert.equal(proof.loaded, 24);
+  const reversed = [...hrefs]; [reversed[1], reversed[10]] = [reversed[10], reversed[1]];
+  await assert.rejects(verifyJapanPriceSortVisible(visibleCards(reversed), items, {total: null, hasMore: true}), /ui_order/);
+  const missing = [...hrefs]; missing[1] = hrefs[10];
+  await assert.rejects(verifyJapanPriceSortVisible(visibleCards(missing), items, {total: null, hasMore: true}), /exact offer membership/);
 });
 
 /** The helpers must wait for real hydration and acknowledgement before the

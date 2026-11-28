@@ -2,7 +2,7 @@
   "version": 1,
   "kind": "japan-power-price-sort-count-release-v1",
   "recordedAt": "2026-11-28T01:15:43.875Z",
-  "status": "source-published-exact-runtime-fixture-layout-corrected-awaiting-new-verification",
+  "status": "source-published-exact-offer-identity-verifier-corrected-awaiting-new-verification",
   "issue": {
     "reportedUrl": "https://avtocena.com/cars/japan?powerTo=160&sort=totalRubDesc&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
     "reproducedPublicly": true,
@@ -330,6 +330,149 @@
           "unboundNameDiagnostics": 0,
           "forceClickUsed": false,
           "browserPassedLocally": false
+        }
+      },
+      {
+        "runId": 46094105753,
+        "runNumber": 70,
+        "attempt": 1,
+        "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46094105753",
+        "controllerSha": "581ac450ddcf995cdbb7d7c3f71d45dcea93a37e",
+        "status": "failure",
+        "completedAt": "2026-11-28T01:41:29Z",
+        "runtimeSha": "20fd18d12b3f5c7aabef860e1b53da0d505dfd64",
+        "runtimeTree": "b3257c801b2b26cc84ec8d37380a2d8ec120b431",
+        "failingStep": "Verify Japan power then price sorting and live count on the exact runtime",
+        "error": {
+          "code": "japan_price_sort_fixture_failed",
+          "message": "locator.waitFor: Error: strict mode violation: locator('main.ac-ajes-catalog').locator('article.ac-catalog-card,article.ac-catalog-list-row').filter({ has: locator('a[href*=\"ajes-stats-sort-1-1\"]') }) resolved to 11 elements:\n    1) <article class=\"ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045]\">…</article> aka getByRole('article').filter({ hasText: 'Фото загружаетсяЯпонияЯпонияTOYOTA TEST2022 г.Лот продан1 020 000₽передний50' })\n    2) <article class=\"ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045]\">…</article> aka getByRole('article').filter({ hasText: 'Фото загружаетсяЯпонияЯпонияTOYOTA TEST2022 г.Лот продан1 183 000₽передний50' })\n    3) <article class=\"ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045]\">…</article> aka getByRole('article').filter({ hasText: 'Фото загружаетсяЯпонияЯпонияTOYOTA TEST2022 г.Лот продан1 182 000₽передний50' })\n    4) <article class=\"ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045]\">…</article> aka getByRole('article').filter({ hasText: 'Фото загружаетсяЯпонияЯпонияTOYOTA TEST2022 г.Лот продан1 181 000₽передний50' })\n    5) <article class=\"ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045]\">…</article> aka getByRole('article').filter({ hasText: 'Фото загружаетсяЯпонияЯпонияTOYOTA TEST2022 г.Лот продан1 180 000₽передний50' })\n    6) <article class=\"ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045]\">…</article> aka getByRole('article').filter({ hasText: 'Фото загружаетсяЯпонияЯпонияTOYOTA TEST2022 г.Лот продан1 179 000₽передний50' })\n    7) <article class=\"ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045]\">…</article> aka getByRole('article').filter({ hasText: 'Фото загружаетсяЯпонияЯпонияTOYOTA TEST2022 г.Лот продан1 178 000₽передний50' })\n    8) <article class=\"ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045]\">…</article> aka getByRole('article').filter({ hasText: 'Фото загружаетсяЯпонияЯпонияTOYOTA TEST2022 г.Лот продан1 177 000₽передний50' })\n    9) <article class=\"ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045]\">…</article> aka getByRole('article').filter({ hasText: 'Фото загружаетсяЯпонияЯпонияTOYOTA TEST2022 г.Лот продан1 176 000₽передний50' })\n    10) <article class=\"ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045]\">…</article> aka getByRole('article').filter({ hasText: 'Фото загружаетсяЯпонияЯпонияTOYOTA TEST2022 г.Лот продан1 175 000₽передний50' })\n    ...\n\nCall log:\n  - waiting for locator('main.ac-ajes-catalog').locator('article.ac-catalog-card,article.ac-catalog-list-row').filter({ has: locator('a[href*=\"ajes-stats-sort-1-1\"]') })\n",
+          "messageTruncated": false
+        },
+        "failure": {
+          "case": "preserved_controls",
+          "stage": "stability_price_sort_power",
+          "progress": {
+            "phase": "power_selected",
+            "readyChecks": 2,
+            "powerSelectedThroughUi": true
+          },
+          "controls": {
+            "power": {
+              "element": {
+                "tag": "input",
+                "className": "ac-unified-checkbox ac-quick-checkbox",
+                "name": "powerTo"
+              },
+              "rect": {
+                "x": 40,
+                "y": 287,
+                "width": 24,
+                "height": 24
+              },
+              "style": {
+                "position": "static",
+                "right": "auto",
+                "display": "grid",
+                "pointerEvents": "auto"
+              },
+              "hit": {
+                "tag": "input",
+                "className": "ac-unified-checkbox ac-quick-checkbox",
+                "name": "powerTo"
+              }
+            },
+            "help": {
+              "element": {
+                "tag": "button",
+                "className": "ac-power-help absolute top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-md text-sm font-semibold",
+                "name": null,
+                "ariaLabel": "Почему есть фильтр до 160 лошадиных сил"
+              },
+              "rect": {
+                "x": 287,
+                "y": 283,
+                "width": 32,
+                "height": 32
+              },
+              "style": {
+                "position": "absolute",
+                "right": "0px",
+                "display": "flex",
+                "pointerEvents": "auto"
+              },
+              "hit": {
+                "tag": "button",
+                "className": "ac-power-help absolute top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-md text-sm font-semibold",
+                "name": null,
+                "ariaLabel": "Почему есть фильтр до 160 лошадиных сил"
+              }
+            },
+            "sort": {
+              "element": {
+                "tag": "button",
+                "className": "ac-filter-control flex h-13 w-full items-center justify-between gap-2 rounded-[15px] px-4 text-left text-sm font-black",
+                "name": null,
+                "ariaLabel": "Сортировка: Без сортировки"
+              },
+              "rect": {
+                "x": 32,
+                "y": 328,
+                "width": 287,
+                "height": 38
+              },
+              "style": {
+                "position": "static",
+                "right": "auto",
+                "display": "flex",
+                "pointerEvents": "auto"
+              },
+              "hit": {
+                "tag": "span",
+                "className": "truncate",
+                "name": null
+              }
+            }
+          }
+        },
+        "completedJourneyCases": 0,
+        "productionRequests": 0,
+        "supplierRequests": 0,
+        "browserVersion": "158.0.8127.36",
+        "reportSha256": "63631f59d5774c41e1ed2d7d3edfaf3256559854756dafe4fa8ae5184c294f57",
+        "artifacts": [
+          {
+            "id": 15242835584,
+            "name": "japan-price-sort-fixture",
+            "bytes": 10006,
+            "sha256": "cf7984cbc58d3075c948adf49073aac2b2ef351651a699aed2724e6d05b99fba",
+            "githubDigestMatched": true
+          },
+          {
+            "id": 15242755596,
+            "name": "japan-model-controls-ready-fixture",
+            "bytes": 1621,
+            "sha256": "288ea4fb069c22585247c317587df3b9aaf7f9612e740d215a1df80dce650948",
+            "githubDigestMatched": true
+          },
+          {
+            "id": 15241709693,
+            "name": "japan-legacy-redirect-fixture",
+            "bytes": 709,
+            "sha256": "d05397e7b1ebda1870a4f8889198a482a37b80c5489622f28de5b68ca0f8ee3e",
+            "githubDigestMatched": true
+          }
+        ],
+        "diagnosis": "Power selection succeeded with the actual runtime styles; the verifier used an ID substring locator, so sort-1-1 also matched sort-1-10 through sort-1-19. Correct the verifier to match the complete offer ID path segment while preserving exact row/order checks.",
+        "correctionValidation": {
+          "substringCollisionReproduced": true,
+          "exactDomOfferIdMembership": true,
+          "exactUiApiOrderStillRequired": true,
+          "missingAndReorderedRowsRejected": true,
+          "helperTestsPassed": 12,
+          "remainingUiSelectorsIndependentlyReviewed": true,
+          "fourFixturePagesPassRealFunctionalValidators": true,
+          "fixtureVehicleRowsChecked": 96,
+          "fixtureExcludedVehiclesVisible": 0
         }
       }
     ]

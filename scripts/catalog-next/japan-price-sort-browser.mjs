@@ -178,8 +178,19 @@ export async function verifyJapanPriceSortVisible(view, items, countInput, {sort
   need(Array.isArray(items) && items.length > 0, 'ui_rows');
   const catalog = view.locator('main.ac-ajes-catalog'), cards = catalog.locator(CARD);
   await cards.nth(items.length - 1).waitFor({state: 'attached', timeout: 60_000});
-  for (const row of items) await cards.filter({has: view.locator('a[href*="' + row.id + '"]')})
-    .waitFor({state: 'attached', timeout: 30_000});
+  // An ID is one path segment: …-1 must not also select …-10 through …-19.
+  // Match each card once even when both its image and title link to the offer.
+  await view.waitForFunction(({selector, expected}) => {
+    const nodes = [...(document.querySelector('main.ac-ajes-catalog')?.querySelectorAll(selector) || [])];
+    const ids = nodes.map(node => {
+      const matches = [...node.querySelectorAll('a[href]')].flatMap(link => {
+        const match = /\/cars\/offer\/([^/?#]+)/.exec(link.getAttribute('href') || '');
+        return match && expected.includes(match[1]) ? [match[1]] : [];
+      });
+      return [...new Set(matches)].length === 1 ? matches[0] : null;
+    });
+    return expected.every(id => ids.filter(value => value === id).length === 1);
+  }, {selector: CARD, expected: items.map(row => row.id)}, {timeout: 30_000});
   const ids = await cards.evaluateAll((nodes, expected) => nodes.map(node => {
     const matches = [...node.querySelectorAll('a[href]')].flatMap(link => {
       const match = /\/cars\/offer\/([^/?#]+)/.exec(link.getAttribute('href') || '');
