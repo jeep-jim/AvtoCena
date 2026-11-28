@@ -253,7 +253,7 @@ test('an old SUV fact cannot disable the modern power/body scope before ordinary
  assert(source.calls.every(call=>call.sql.includes('order by auction_date desc, id asc')));
 });
 
-test('unknown body schema retains encyclopedia/editorial candidates and an incomplete scope with bounded manual fallback',async t=>{
+test('unknown body schema retains complete known encyclopedia/editorial candidates without unrelated canonical IDs',async t=>{
  const index=knowledge([fact('Toyota','LOCAL',150)]);
  const editorial={revision:'body-e1',entries:{'ajes-stats-manual-body':{id:'ajes-stats-manual-body',market:'japan',sourceId:'ajes_japan_feed',sourceOfferId:'manual-body',status:'visible',specifications:{bodyType:'suv'}}}} as unknown as CatalogEditorialIndex;
  const rows=[...Array.from({length:240},(_,i)=>raw('body-unknown-'+i,{PW:'',FINISH:10000000-i})),
@@ -270,15 +270,14 @@ test('unknown body schema retains encyclopedia/editorial candidates and an incom
    read:async sourcePage=>{const value=source.read({table:'stats',sort:'totalRubDesc',page:sourcePage,pageSize:24,sourceSelection:resolved.selection!});return {...value,items:value.items.filter(filter.matches)};}});
   assert(source.calls.length-before<=8);assert.equal(result.partial,false);assert.equal(result.stale,false);
   assert.equal(Object.hasOwn(result,'total'),false);
-  if(page===1){assert.equal(result.items.length,0);assert.equal(result.scanLimited,true);assert.equal(result.hasMore,true);}
+  if(page<=2){assert.equal(result.items.length,24);assert.equal(result.scanLimited,false);assert.equal(result.hasMore,true);}
   actual.push(...result.items);after=result.nextCursor??undefined;
   if(!result.hasMore){finished=true;break;}
   assert(after&&after!==previous,'manual body fallback must retain a progressing bounded continuation');
  }
  assert(finished,'the finite body selection reaches real source exhaustion');
  assert.equal(actual.length,51);assert.deepEqual(actual.map(row=>row.id),expected.map(row=>row!.id));
- assert(source.calls.some(call=>call.rawIds.some(id=>id.startsWith('body-unknown-'))),'manual body fallback deliberately retains a broad raw candidate scope');
- assert(actual.every(row=>!row.id.startsWith('ajes-stats-body-unknown-')),'broad raw candidates do not become matching body offers');
+ assert(source.calls.every(call=>call.rawIds.every(id=>!id.startsWith('body-unknown-'))),'a body edit must not admit unrelated canonical IDs before LIMIT');
 });
 
 test('observed raw body candidates preserve fullwidth and repeated-space labels before final filtering',t=>{
@@ -307,7 +306,7 @@ test('a manual body ID retains a local horsepower override outside every body do
  const result=source.read({table:'stats',powerTo:160,sourceSelection:resolved.selection!,sourcePhase:'k'});
  const accepted=result.items.filter(filter.matches);assert.deepEqual(accepted.map(row=>row.id),['ajes-stats-body-edited']);
  assert.equal(japanLocalPowerHp(accepted[0]),120);assert.equal(resolved.complete,false);
- assert.deepEqual([...source.calls[0].rawIds].sort(),rows.map(row=>row.ID).sort(),'the manual body fallback is broad before the actual local body/power filter');
+ assert.deepEqual(source.calls[0].rawIds,['body-edited'],'the exact manual body identity remains without unrelated canonical IDs');
 });
 
 test('a small Mazda 3 donor keeps its source make scope and cannot assign local power to an unrelated BMW M3',t=>{

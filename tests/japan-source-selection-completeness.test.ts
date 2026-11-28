@@ -39,7 +39,10 @@ function editorialFor(id:string,specifications:Record<string,unknown>,entryId='a
  * absent POSIX whitespace class; this is not a supplier compatibility test. */
 function oracle(rows:WireRow[],index:CalculationIndex|null=null,editorial=emptyEditorial){
  const db=new DatabaseSync(':memory:');
- db.function('regexp',(pattern:any,value:any)=>value==null?null:Number(new RegExp(String(pattern).replaceAll('[[:space:]]','\\s'),'i').test(String(value))));
+ // Unicode simple case folding also exercises the Kelvin/long-s exceptions
+ // of an ICU-style character set. This remains an offline superset oracle,
+ // not evidence of the supplier database version, collation or SQL parser.
+ db.function('regexp',(pattern:any,value:any)=>value==null?null:Number(new RegExp(String(pattern).replaceAll('[[:space:]]','\\s'),'iu').test(String(value))));
  db.exec('create table stats(ID text,YEAR integer,AUCTION_TYPE integer,STATUS text,FINISH real,MARKA_NAME text collate nocase,MODEL_NAME text collate nocase,AUCTION_DATE text,PW text,TIME text,FUEL text,ENG_V integer,GRADE text,KUZOV text,PRIV text,KPP text,BODY_TYPE text,IMAGES text)');
  const columns=Object.keys(raw('schema'));
  const insert=db.prepare(`insert into stats (${columns.join(',')}) values (${columns.map(()=>'?').join(',')})`);
@@ -86,7 +89,7 @@ test('a legacy editorial identity change retains owner power without a direct ho
  assert.equal(ajesResultFilter({market:'japan',powerTo:160}).matches(offer),true);
  const query=source.powerQuery({powerTo:160});
  assert.deepEqual(source.known(query).map(offer=>offer!.id),['ajes-stats-owner-from-editorial']);
- assert(source.select(query).some(value=>value.ID===unrelated.ID),'the manual ID fallback deliberately retains a broad raw candidate scope');
+ assert(!source.select(query).some(value=>value.ID===unrelated.ID),'an unrelated canonical ID must not enter through a manual exception');
  const unrelatedOffer=source.admit(unrelated);assert(unrelatedOffer);
  assert.equal(ajesResultFilter({market:'japan',powerTo:160}).matches(unrelatedOffer),false,'the broad candidate scope cannot make an unrelated high-PW row visible');
 });
@@ -103,6 +106,18 @@ test('normalized supplier IDs retain the actual visible editorial power lookup',
   assert(selected.has(row.ID),'retain raw spelling '+JSON.stringify(row.ID));
  }
  assert.equal(source.known(query).length,rows.length);
+});
+
+test('Unicode case-folded raw IDs preserve normalized editorial power even when the anomaly alphabet treats them as ASCII letters',t=>{
+ const entries={...editorialFor('K-edited',{powerHp:150,powerDataConfidence:'verified'}).entries,
+  ...editorialFor('s-edited',{powerHp:150,powerDataConfidence:'verified'}).entries};
+ const rows=[raw('K-edited'),raw('ſ-edited'),raw('ordinary-unrelated')];
+ const source=oracle(rows,null,{revision:'unicode-casefold-editorial',entries});t.after(source.close);
+ assert.equal(/[^A-Za-z0-9_-]/iu.test('K-edited'),false);
+ assert.equal(/[^A-Za-z0-9_-]/iu.test('ſ-edited'),false);
+ const query=source.powerQuery({powerTo:160});
+ assert.deepEqual(source.known(query).map(offer=>offer!.id).sort(),['ajes-stats-K-edited','ajes-stats-s-edited']);
+ assert(!source.select(query).some(row=>row.ID==='ordinary-unrelated'));
 });
 
 test('trimmed directory names cannot discard a matching normalized make or model',t=>{
@@ -155,14 +170,14 @@ for(const withPower of [false,true])test(`normalized manual body IDs survive ${w
  }
 });
 
-test('manual fallback broadens raw K while actual filtering rejects over-limit rows and preserves every unknown row in U',t=>{
+test('manual ID exceptions retain normalized identities without unrelated over-limit rows and preserve every unknown row in U',t=>{
  const values=['',null,'0','000','N/A','150,200','160.0','０','9007199254740992'];
  const unknown=values.map((PW,i)=>raw('unknown-'+i,{PW}));
  const over=raw('ordinary-over-limit'),known=raw('ordinary-in-range',{PW:'150'});
  const editorial=editorialFor('different-manual-id',{powerHp:150,powerDataConfidence:'verified'});
  const source=oracle([...unknown,over,known],null,editorial);t.after(source.close);
  const query=source.powerQuery({powerTo:160}),filter=ajesResultFilter({market:'japan',powerTo:160});
- assert(source.select(query).some(row=>row.ID===over.ID),'a visible manual ID makes the candidate power clause broad');
+ assert(!source.select(query).some(row=>row.ID===over.ID),'a visible manual ID cannot erase the power candidate for unrelated canonical IDs');
  assert.deepEqual(source.known(query).map(offer=>offer!.id),['ajes-stats-ordinary-in-range']);
  const u=source.select({...query,sourcePhase:'u'}),selected=new Set(u.map(row=>row.ID));
  for(const row of unknown){
@@ -174,7 +189,61 @@ test('manual fallback broadens raw K while actual filtering rejects over-limit r
  assert.deepEqual(admittedUnknown.map(offer=>offer!.id).sort(),unknown.map(row=>'ajes-stats-'+row.ID).sort());
 });
 
-test('a broad manual power clause keeps outer filters and an honest bounded K continuation before eventually returning all known rows',async t=>{
+test('ordinary editorial presentation and non-power specifications cannot erase the power candidate before 24 to 48 DESC cards',async t=>{
+ const prefix=Array.from({length:240},(_,i)=>raw('edited-prefix-'+i,{PW:'400',FINISH:30000000-i*1000}));
+ const visible=Array.from({length:48},(_,i)=>raw('edited-visible-'+String(i).padStart(2,'0'),{PW:'150',FINISH:1000000-i*1000}));
+ const specifications=[undefined,{}, {bodyType:'suv'}, {color:'white'}, {drive:'awd'}, {transmission:'automatic'},
+  {bodyType:'sedan',color:'black',drive:'rwd',transmission:'manual'}];
+ const entries=Object.fromEntries(specifications.map((specification,i)=>{
+  const id=prefix[i].ID;
+  return ['ajes-stats-'+id,{id:'ajes-stats-'+id,market:'japan',sourceId:'ajes_japan_feed',sourceOfferId:id,status:'visible',
+   title:'Edited title',photos:['https://example.com/offline-photo'],sellerPrice:{amount:1000000,currency:'JPY'},
+   ...(specification?{specifications:specification}:{})}];
+ }));
+ const editorial={revision:'ordinary-editorial',entries} as unknown as CatalogEditorialIndex;
+ const source=oracle([...prefix,...visible],null,editorial);t.after(source.close);
+ const query={...source.powerQuery({powerTo:160}),sort:'totalRubDesc'} as AjesQuery;
+ const filter=ajesResultFilter({market:'japan',powerTo:160});
+ assert(prefix.every(row=>{const offer=source.admit(row);return offer&&!filter.matches(offer);}),
+  'real admission must establish that presentation-only edits cannot create an in-range power value');
+ let reads=0;
+ const epoch=ajesPowerEvidenceEpoch({runtimeSha:'a'.repeat(40),editorialRevision:editorial.revision,calculationDigest:null});
+ const options={pageSize:24,evidenceEpoch:epoch,cursorKey:JSON.stringify(query),sourceSelection:query.sourceSelection,
+  itemKey:(offer:NonNullable<ReturnType<typeof source.admit>>)=>offer.id,
+  known:(offer:NonNullable<ReturnType<typeof source.admit>>)=>!japanUnknownPower(offer),
+  read:async(page:number,phase:'k'|'u')=>{
+   reads++;
+   const rows=source.select({...query,page,pageSize:24,sourcePhase:phase});
+   const items=rows.map(source.admit).filter((offer):offer is NonNullable<typeof offer>=>Boolean(offer)&&filter.matches(offer)&&japanUnknownPower(offer)===(phase==='u'));
+   return {items,received:rows.length,observedAt,stale:false,partial:false};
+  }};
+ const first=await readPowerOrderedAjesPage({...options,page:1});
+ assert.equal(first.items.length,24);assert.equal(first.scanLimited,false);assert.equal(first.partial,false);assert.equal(first.stale,false);
+ assert(reads<=8);assert(first.nextCursor);
+ const before=reads,second=await readPowerOrderedAjesPage({...options,page:2,after:first.nextCursor});
+ assert.equal(second.items.length,24);assert.equal(second.scanLimited,false);assert.equal(second.partial,false);assert.equal(second.stale,false);
+ assert(reads-before<=8);
+ const ids=[...first.items,...second.items].map(offer=>offer.id);
+ assert.equal(new Set(ids).size,48);assert.deepEqual(ids,visible.map(row=>'ajes-stats-'+row.ID));
+ assert.equal(Object.hasOwn(first,'total'),false);assert.equal(Object.hasOwn(second,'total'),false);
+});
+
+test('non-power editorial controls retain supplier, encyclopedia and owner horsepower through their original candidate branches',t=>{
+ const rows=[raw('inert-supplier',{PW:'150'}),raw('inert-annual',{MARKA_NAME:'AUDI',MODEL_NAME:'A4'}),
+  raw('inert-owner',{MARKA_NAME:'HONDA',MODEL_NAME:'STEPWGN'})];
+ const entries=Object.fromEntries(rows.flatMap(row=>Object.entries(editorialFor(row.ID,
+  {bodyType:'suv',color:'white',drive:'awd',transmission:'automatic'}).entries)));
+ const editorial={revision:'inert-existing-power',entries},index=knowledge(150);
+ const source=oracle(rows,index,editorial);t.after(source.close);
+ const power=buildJapanPowerCandidatePlan({powerTo:160,index,editorial});
+ assert.deepEqual(power.ids,[],'current specification controls do not need a power identity exception');
+ for(const row of rows){const offer=source.admit(row);assert(offer);assert.equal(ajesResultFilter({market:'japan',powerTo:160}).matches(offer),true);}
+ assert.deepEqual(source.known(source.powerQuery({powerTo:160})).map(offer=>offer!.id).sort(),rows.map(row=>'ajes-stats-'+row.ID).sort());
+ const legacy={revision:'unrecognized-legacy',entries:editorialFor('future-edit',{unknownSavedField:'retained-conservatively'}).entries};
+ assert.deepEqual(buildJapanPowerCandidatePlan({powerTo:160,index:null,editorial:legacy}).ids,['future-edit']);
+});
+
+test('normalized manual power IDs preserve outer filters and fill 24 to 48 before the broad unknown phase',async t=>{
  const manualId='manual-after-prefix';
  const editorial=editorialFor(manualId,{powerHp:150,powerDataConfidence:'verified'},'legacy-editorial-value-id');
  const prefix=Array.from({length:240},(_,i)=>raw('manual-fallback-over-'+i,{FINISH:30000000-i*1000}));
@@ -209,9 +278,12 @@ test('a broad manual power clause keeps outer filters and an honest bounded K co
   assert(calls.length-before<=8,'a manual fallback never expands the per-request source read budget');
   assert.equal(result.partial,false);assert.equal(result.stale,false);assert.equal(Object.hasOwn(result,'total'),false);
   if(page===1){
-   assert.equal(result.items.length,0);assert.equal(result.reads,8);assert.equal(result.scanLimited,true);assert.equal(result.hasMore,true);
-   assert.match(result.nextCursor!,/^j2\.k\.9\.0\.2\./,'eight rejected source pages leave an honest K position');
-   assert(calls.every(call=>call.phase==='k'&&call.rawIds.length===24&&call.known===0));
+   assert.equal(result.items.length,24);assert.equal(result.scanLimited,false);assert.equal(result.hasMore,true);
+   assert(calls.every(call=>call.phase==='k'&&call.known===24));
+  }
+  if(page===2){
+   assert.equal(result.items.length,24);assert.equal(result.scanLimited,false);assert.equal(result.hasMore,true);
+   assert(calls.every(call=>call.phase==='k'),'the first 48 cards must still be the global known phase');
   }
   actual.push(...result.items);after=result.nextCursor??undefined;
   if(!result.hasMore){finished=true;break;}
@@ -222,7 +294,9 @@ test('a broad manual power clause keeps outer filters and an honest bounded K co
  assert.equal(actual.length,48);assert.equal(new Set(actual.map(offer=>offer.id)).size,48);
  assert.equal(actual.filter(offer=>offer.id==='ajes-stats-'+manualId).length,1);
  const rawIds=new Set(calls.flatMap(call=>call.rawIds));
- for(const row of excluded)assert(!rawIds.has(row.ID),'the broad power clause must preserve outer make/year and heavy exclusions: '+row.ID);
+ for(const row of excluded)assert(!rawIds.has(row.ID),'manual exceptions must preserve outer make/year and heavy exclusions: '+row.ID);
+ assert(calls.filter(call=>call.phase==='k').every(call=>call.rawIds.every(id=>!id.startsWith('manual-fallback-over-'))),
+  'unrelated canonical high-power rows must be excluded before K LIMIT');
  assert(calls.some(call=>call.phase==='u'),'exhaustion must inspect the broad unknown phase');
 });
 

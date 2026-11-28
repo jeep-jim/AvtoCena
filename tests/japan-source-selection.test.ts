@@ -58,7 +58,9 @@ test('body cohorts use the same exact alias resolution and combine with power, n
  const body={models:[{modelKey:'audi:a4',make:'Audi',model:'A4',year:2020}],ids:['saved-1'],sourceBody:{field:'BODY_TYPE' as const,labels:['SUV','Кроссовер']},pickupCandidates:false,complete:true,unresolved:[]};
  const result=resolveJapanSourceSelection({power,body,sourceModels:[{make:'AUDI',model:'A 4'}],directoryComplete:true});
  const sql=japanSourceSelectionSql(result.selection!,'k');
- assert.deepEqual(result.selection!.body!.ids,['saved-1']);assert(sql.endsWith(' and (1=1))'),'normalized manual IDs require a broad body clause');
+ assert.deepEqual(result.selection!.body!.ids,['saved-1']);assert(sql.includes("id in ('saved-1')"));
+ assert(sql.includes("id regexp '[^A-Za-z0-9_-]'"),'noncanonical raw IDs retain entity/NFKC/trim spellings');
+ assert(!sql.includes('(1=1)'),'an exact edited identity must not erase the source selection');
  const withoutManual=japanSourceSelectionSql({...result.selection!,body:{...result.selection!.body!,ids:[]}},'k');
  assert(withoutManual.includes("body_type is not null and body_type!=''"));assert(withoutManual.includes(') and ('));
  assert(!sql.includes('body_type) in'),'source body aliases cannot silently narrow NFKC/whitespace variants');
@@ -69,11 +71,13 @@ test('missing body schema keeps representable known candidates explicitly incomp
  const result=resolveJapanSourceSelection({body,sourceModels:[{make:'AUDI',model:'A 4'}],directoryComplete:true});
  assert.equal(result.complete,false);assert(result.selection);assert.deepEqual(result.unresolved,['body_source_schema_unobserved']);
  const sql=japanSourceSelectionSql(result.selection);
- assert.equal(sql,'(1=1)','manual identity normalization is retained without a guessed source function');
+ assert(sql.includes("id in ('saved-1')"));assert(sql.includes("id regexp '[^A-Za-z0-9_-]'"));
+ assert(!sql.includes('(1=1)'),'manual normalization is retained without a source-wide candidate');
  const modelOnly=japanSourceSelectionSql({...result.selection!,body:{...result.selection!.body!,ids:[]}});
  assert(modelOnly.includes("model_name like '%A 4%'"));assert(!modelOnly.includes('body_type'));
  const noIndex=resolveJapanSourceSelection({body:{...body,models:[],unresolved:['body_source_schema_unobserved','body_encyclopedia_unavailable']},sourceModels:[],directoryComplete:false});
- assert.equal(noIndex.complete,false);assert(noIndex.selection);assert.equal(japanSourceSelectionSql(noIndex.selection),'(1=1)');
+ assert.equal(noIndex.complete,false);assert(noIndex.selection);
+ assert(japanSourceSelectionSql(noIndex.selection).includes("id in ('saved-1')"));
  const invalid=resolveJapanSourceSelection({body:{...body,unresolved:['body_evidence_identity_invalid']},sourceModels:[{make:'AUDI',model:'A 4'}],directoryComplete:true});
  assert.equal(invalid.selection,null);
 });
@@ -93,7 +97,7 @@ test('local-only body scope intersects annual power exceptions while manual clau
   {make:'AUDI',model:'A4',years:[2020,2021]},{make:'TOYOTA',model:'POWER ONLY',years:[2020]},
  ],ids:['manual-power'],ownerModels:[]},body:{models:[{make:'AUDI',model:'A4',years:[2021,2022]}],ids:['manual-body'],pickupCandidates:false}};
  const before=JSON.stringify(selection),manual=japanSourceSelectionSql(selection,'k');
- assert.equal(manual,'((1=1) and (1=1))');
+ assert(manual.includes("id in ('manual-body','manual-power')"));assert(!manual.includes('(1=1)'));
  const unedited={...selection,power:{...selection.power,ids:[]},body:{...selection.body,ids:[]}},sql=japanSourceSelectionSql(unedited,'k');
  assert(!sql.includes('POWER ONLY'));assert(!sql.includes('2020'));assert(sql.includes("model_name like '%A4%' and year=2021"));
  assert(sql.includes('pw>=0 and pw<=160'));
@@ -132,7 +136,7 @@ test('source power grammar preserves the normalization namespace and leaves the 
  assert.equal(japanSourceSelectionSql(selection,'u'),'(1=1)','U must preserve every malformed or absent wire value');
  const withBody={...selection,body:{models:[],ids:['body-only'],pickupCandidates:false}};
  const unknownBody=japanSourceSelectionSql(withBody,'u');
- assert.equal(unknownBody,'((1=1) and (1=1))');assert.doesNotMatch(unknownBody,/\bpw\b/);
+ assert(unknownBody.includes("id in ('body-only')"));assert(unknownBody.includes("id regexp '[^A-Za-z0-9_-]'"));assert.doesNotMatch(unknownBody,/\bpw\b/);
 });
 
 test('exact-family source exclusion covers the complete existing make/model roster without suffix guesses',t=>{
@@ -190,10 +194,11 @@ for(const count of [25,50,100])test(`${count} model cohorts fit the shared SQL b
  for(const sql of emitted){
   assert(new URLSearchParams({sql}).toString().length<=6000,'one fixed reserve covers both LIST and COUNT');
   assert.equal(where(sql),where(emitted[0]),'page, sort and count projection must not choose a different candidate set');
-  assert.doesNotMatch(sql,/regexp|trim\(|replace\(/i);
+  assert.doesNotMatch(sql,/\bpw\s+regexp|trim\(|replace\(/i);
  }
  if(count===25)assert(where(emitted[0]).includes('marka_name like'),'make restriction is kept while it fits');
  const db=new DatabaseSync(':memory:');t.after(()=>db.close());
+ db.function('regexp',(pattern:any,value:any)=>value==null?null:Number(new RegExp(String(pattern),'iu').test(String(value))));
  db.exec('create table stats(id text,year integer,auction_type integer,status text,finish integer,marka_name text,model_name text,auction_date text,pw text,mileage integer)');
  const insert=db.prepare("insert into stats values(?,?,2,'Sold',1000000,?,?,'2026-11-28','400',1000)");
  models.forEach((row,i)=>insert.run('cohort-'+i,row.years[0],' '+row.make+' ', '\t'+row.model+'　'));
@@ -207,13 +212,14 @@ test('tiny budgets broaden complete validated model sets, including Unicode code
  const models=Array.from({length:40},(_,i)=>({make:'FIXTURE '+i,model:names[i%names.length]+i,years:[2023]}));
  const selection={version:1 as const,power:{to:160,models,ids:[],ownerModels:[]}};
  const db=new DatabaseSync(':memory:');t.after(()=>db.close());
+ db.function('regexp',(pattern:any,value:any)=>value==null?null:Number(new RegExp(String(pattern),'iu').test(String(value))));
  db.exec('create table stats(marka_name text,model_name text,year integer,pw text)');
  const insert=db.prepare("insert into stats values(?,?,2023,'400')");
  for(const row of models)insert.run(' '+row.make+' ', '\t'+row.model+'　');
  const compiled=[];
  for(const budget of [2000,800,350,0]){
   const sql=japanSourceSelectionSql(selection,'k',budget);compiled.push(sql);
-  assert.doesNotMatch(sql,/regexp|trim\(|replace\(/i);
+  assert.doesNotMatch(sql,/\bpw\s+regexp|trim\(|replace\(/i);
   assert(sql==='(1=1)'||new URLSearchParams({sql}).toString().length-4<=budget);
   const sqlite=sql.replace(/\bpw\s*(>=|<=|>|<)\s*(\d+)/g,'cast(pw as real)$1$2');
   assert.equal(db.prepare('select count(*) as total from stats where '+sqlite).get()!.total,models.length);
@@ -221,4 +227,55 @@ test('tiny budgets broaden complete validated model sets, including Unicode code
  assert(compiled.some(sql=>sql.includes('model_name like')),'the test exercises a compressed pattern stage before broad fallback');
  assert.equal(compiled.at(-1),'(1=1)');
  assert.throws(()=>japanSourceSelectionSql({...selection,power:{...selection.power,models:[{make:'BAD',model:"x'",years:[2023]}]}},'k',0),/ajes_invalid_query/,'a small budget never bypasses descriptor validation');
+});
+
+test('compact literal model candidates retain make/year identity and escape observed punctuation',t=>{
+ const special=['A.4','A+B','X(Y)','A_B','A&B','X/Y','Ａ４','𝟙XX','АБ'];
+ const names=[...Array.from({length:100},(_,i)=>'MODEL '+String(i).padStart(3,'0')),...special];
+ const models=names.map(model=>({make:'FIXTURE',model,years:[2020,2022]}));
+ const selection={version:1 as const,body:{models,ids:[],pickupCandidates:false}};
+ const full=japanSourceSelectionSql(selection,undefined,100000),compact=japanSourceSelectionSql(selection,undefined,3000);
+ assert.match(compact,/model_name regexp/);assert.match(compact,/marka_name like '%FIXTURE%'/);
+ assert.match(compact,/year in \(2020,2022\)/);assert.doesNotMatch(compact,/1=1|\\/);
+ assert(new URLSearchParams({sql:compact}).toString().length-4<=3000);
+ assert.match(compact,/model_name like '%A_B%'/,'existing underscore wildcard semantics stay in LIKE');
+ const db=new DatabaseSync(':memory:');t.after(()=>db.close());
+ db.function('regexp',(pattern:any,value:any)=>value==null?null:Number(new RegExp(String(pattern),'iu').test(String(value))));
+ db.exec('create table stats(id integer primary key,marka_name text,model_name text,year integer)');
+ const insert=db.prepare('insert into stats(marka_name,model_name,year) values(?,?,?)');
+ for(const make of ['FIXTURE','OTHER'])for(const model of [...names,'A94','AB','XYY','UNRELATED','A\nB'])for(const year of [2019,2020,2021,2022]){
+  insert.run(make,model,year);insert.run(' '+make+' ','\t'+model+'　',year);
+ }
+ const ids=(sql:string)=>db.prepare('select id from stats where '+sql+' order by id').all().map(row=>row.id);
+ assert.deepEqual(ids(compact),ids(full),'compaction preserves the actual candidate relation, including negative make/year and punctuation cases');
+});
+
+test('factoring repeated make and year clauses preserves the full finite relation before broadening',t=>{
+ const models=Array.from({length:60},(_,i)=>({make:'FIXTURE MAKE '+Math.floor(i/20),model:'MODEL '+i%20,years:[2008+i%10,2019+i%8]}));
+ const selection={version:1 as const,body:{models,ids:[],pickupCandidates:false}};
+ const full=japanSourceSelectionSql(selection,undefined,100000),compact=japanSourceSelectionSql(selection,undefined,3500);
+ for(const make of ['FIXTURE MAKE 0','FIXTURE MAKE 1','FIXTURE MAKE 2'])assert(compact.includes(`marka_name like '%${make}%'`));
+ assert(new URLSearchParams({sql:compact}).toString().length-4<=3500);assert.doesNotMatch(compact,/1=1/);
+ const db=new DatabaseSync(':memory:');t.after(()=>db.close());
+ db.function('regexp',(pattern:any,value:any)=>value==null?null:Number(new RegExp(String(pattern),'iu').test(String(value))));
+ db.exec('create table stats(id integer primary key,marka_name text,model_name text,year integer)');
+ const insert=db.prepare('insert into stats(marka_name,model_name,year) values(?,?,?)');
+ for(const make of ['FIXTURE MAKE 0','FIXTURE MAKE 1','FIXTURE MAKE 2','OTHER'])for(const model of [...new Set(models.map(row=>row.model)),'OTHER'])for(let year=2007;year<=2027;year++)insert.run(make,model,year);
+ const ids=(sql:string)=>db.prepare('select id from stats where '+sql+' order by id').all().map(row=>row.id);
+ assert.deepEqual(ids(compact),ids(full),'model/year orientation and shared tails do not mix cohorts');
+});
+
+test('compact source selection keeps one complete predicate across LIST, COUNT, sorts and continuation',()=>{
+ const models=Array.from({length:100},(_,i)=>({make:'FIXTURE',model:'MODEL '+String(i).padStart(3,'0'),years:[2020,2022]}));
+ const selection={version:1 as const,power:{to:160,models,ids:[],ownerModels:[]}};
+ const query={table:'stats' as const,powerTo:160,sourceSelection:selection,sourcePhase:'k' as const};
+ const variants=[{}, {page:1000000,pageSize:48}, {sort:'auctionDateDesc,mileageDesc,totalRubDesc,year'},
+  {aggregate:'count' as const}, {aggregate:'count' as const,countIdentity:true as const}];
+ const where=(sql:string)=>sql.split(' where ')[1].split(' order by ')[0];
+ const queries=variants.map(patch=>ajesQuery({...query,...patch}).sql);
+ for(const sql of queries){
+  assert(new URLSearchParams({sql}).toString().length<=6000);
+  assert.match(sql,/model_name regexp/);assert.match(sql,/marka_name like '%FIXTURE%'/);
+  assert.doesNotMatch(sql,/\bpw\s+regexp/);assert.equal(where(sql),where(queries[0]));
+ }
 });

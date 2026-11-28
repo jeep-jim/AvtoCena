@@ -31,6 +31,16 @@ const powerRange=(from:unknown,to:unknown)=>[from,to].some(value=>value!==undefi
  &&(from===undefined||to===undefined||Number(from)<=Number(to));
 const unique=<T>(items:T[],key:(value:T)=>string)=>[...new Map(items.map(item=>[key(item),item])).values()];
 const orderedStrings=(items:string[])=>[...new Set(items)].sort();
+// These current editorial fields cannot introduce a positive horsepower value
+// or activate the owner make/model/fuel/chassis rule. Encyclopedia enrichment
+// runs before editorial edits, and its original annual candidates are already
+// retained below. Keep every other legacy field conservatively: a saved edit
+// can change power, identity, raw evidence or the public power safety result.
+const powerInertEditorialFields=new Set(['bodyType','color','drive','transmission']);
+function editorialMayChangePower(specifications:unknown):boolean {
+ if(specifications===undefined||specifications===null)return false;
+ return !record(specifications)||Object.keys(specifications).some(key=>!powerInertEditorialFields.has(key));
+}
 
 export function buildJapanPowerCandidatePlan(options:{powerFrom?:number;powerTo?:number;index:CalculationIndex|null;editorial:CatalogEditorialIndex}):JapanPowerCandidatePlan {
  const {powerFrom,powerTo}=options;
@@ -59,10 +69,12 @@ export function buildJapanPowerCandidatePlan(options:{powerFrom?:number;powerTo?
  }
  if(!record(options.editorial?.entries))unresolved.push('power_editorial_invalid');
  else for(const [id,entry] of Object.entries(options.editorial.entries)){
-  // Legacy specifications can change make/model/fuel and activate owner or
-  // annual evidence without a direct powerHp edit. Actual admission matches
-  // the dictionary key and source identity, not the entry's redundant id.
+  // Legacy specifications can change make/model/fuel and activate owner power
+  // without a direct powerHp edit. Presentation and the current non-power
+  // specification controls must not turn every power query into all rows.
+  // Actual admission matches the key/source identity, not redundant entry.id.
   if(entry?.market!=='japan'||entry.sourceId!=='ajes_japan_feed'||entry.status!=='visible')continue;
+  if(!editorialMayChangePower(entry.specifications))continue;
   if(!validId(entry.sourceOfferId)||id!==`ajes-stats-${entry.sourceOfferId}`){unresolved.push('power_editorial_identity_invalid');continue;}
   ids.push(entry.sourceOfferId);
  }
