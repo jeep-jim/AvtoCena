@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "status": "candidate_frozen_pending_ci_and_live",
+  "status": "test_harness_corrected_pending_ci_and_live",
   "timezone": "Asia/Krasnoyarsk",
   "retainedRuntime": "5b1e513dc9af3735e3b757c6fe7da763aa92837e",
   "candidateRuntime": "f83fc7d9983fad8619984128196d5f72eaa292aa",
@@ -452,11 +452,11 @@
   },
   "nextChange": "Conservative known-power candidate selection only for source-price K phase, retaining local/manual overrides and existing bounds; live acceptance remains required.",
   "nextCandidate": {
-    "runtimeSha": "f2918604dcbaadc710d7d03d4345dedabe121e63",
-    "runtimeTree": "1840b81f94a3436785938be513f25582ec51a4d0",
-    "runtimeDiffSha256": "8be6d3997c5624772fbb5b4c28eca304f724112df9ced56489816ec69b24b0e4",
+    "runtimeSha": "7865aaf51441f5403047b47d17cbba94e712925c",
+    "runtimeTree": "2831b0090c83111ebb22d84a59692a4c6a47876e",
+    "runtimeDiffSha256": "1c601787fd480c0a146b1d36909f5eec2f532835bfbc191024159fe9fdea1cab",
     "runtimeFileCount": 28,
-    "pricingToServingDiffSha256": "f476ef75785c8ccc3d31e991ec64da204326563d0b6944ca87822056f351cb6b",
+    "pricingToServingDiffSha256": "3ab8df969d87166f8e5343af4008056840e4aaefe0e831ff83b967aecd2ce732",
     "pricingToServingFileCount": 141,
     "localVerification": {
       "targetedTests": {
@@ -466,7 +466,12 @@
       "webAndEngineTypecheckPassed": true,
       "independentNormalizedIdReviewPassed": true,
       "protectedPricingPathsUnchanged": true,
-      "productionPublished": false
+      "productionPublished": false,
+      "exactNativeSelection": {
+        "files": 78,
+        "passed": 683,
+        "failed": 0
+      }
     },
     "behavior": {
       "knownPhaseCandidateSupersetOnly": true,
@@ -477,6 +482,29 @@
       "overallCountQueryUnchanged": true,
       "readBudgetUnchanged": true,
       "liveAcceptanceRequired": true
-    }
+    },
+    "testOnlyCorrectionFrom": "f2918604dcbaadc710d7d03d4345dedabe121e63",
+    "applicationCodeUnchangedByTestCorrection": true
+  },
+  "prepublicationCiFailure": {
+    "runId": 46162781952,
+    "jobId": 141033620099,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46162781952",
+    "runtimeSha": "f2918604dcbaadc710d7d03d4345dedabe121e63",
+    "controllerSha": "0e3da079b9c828665075ab73d5bfc94311d8273d",
+    "controllerTests": {
+      "passed": 1869,
+      "failed": 0
+    },
+    "nativeTests": {
+      "passed": 679,
+      "failed": 3,
+      "total": 682
+    },
+    "failedFile": "tests/ajes-model-cursor-continuity.test.ts",
+    "error": "ReferenceError: sourcePriceOrder is not defined",
+    "failedTestLayer": "extracted production cursor test harness",
+    "productionReleaseTriggered": false,
+    "browserFixtureSteps9Through13Passed": true
   }
 }
