@@ -1,6 +1,7 @@
 import test,{mock} from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import {DatabaseSync} from 'node:sqlite';
 import {parseJapanSourcePower,japanSupplierPower,japanSupplierPreviewPower,japanSupplierPowerLabel,japanUnknownPower,japanPowerFilterSummary,japanPowerFilterNotice} from '../apps/web/lib/catalog/japan-source-power';
 import {ajesResultFilter} from '../apps/web/lib/catalog/ajes-result-filter';
 import {ajesPowerEstimateHp} from '../apps/web/lib/catalog/ajes-power-estimate';
@@ -30,6 +31,18 @@ function offer(power:unknown,id='power-fixture',fuel='P'){
 }
 
 const sourcePage=(query:any,items:any[],received=items.length,flags:Record<string,unknown>={})=>({items,page:query.page||1,pageSize:query.pageSize||24,received,partial:false,stale:false,observedAt:'2026-11-26T06:02:33.366Z',...flags});
+/** Execute the actual source WHERE/ORDER/LIMIT against a finite offline table. */
+function sourceOrderedFixture(rows:any[]){
+ const db=new DatabaseSync(':memory:');
+ db.function('regexp',(pattern:any,value:any)=>value==null?0:Number(new RegExp(String(pattern),'i').test(String(value))));
+ db.exec('create table stats(id text,year integer,auction_type integer,status text,finish integer,marka_name text,model_name text,auction_date text,pw text)');
+ const insert=db.prepare('insert into stats values(?,?,?,?,?,?,?,?,?)'),byId=new Map<string,any>();
+ for(const item of rows){
+  const id=String(item.sourceOfferId);byId.set(id,item);
+  insert.run(id,item.year,2,'Sold',item.operational.raw.finalPriceJpy,item.make,item.model,item.auctionDate||'2026-11-28',String(item.operational.raw.sourcePower??''));
+ }
+ return {read:(query:any)=>{const selected=db.prepare(ajesQuery(query).sql).all();return sourcePage(query,selected.map(item=>byId.get(String(item.id))),selected.length);},close:()=>db.close()};
+}
 async function catalogPowerFixture(read:(query:any,options?:any)=>unknown|Promise<unknown>){
  const state={queries:[] as any[],counts:0,priced:[] as string[][],snapshots:[] as any[],editorialRevision:'fixture-1',calculationDigest:null as string|null,runtimeSha:'1'.repeat(40),
   evidenceReader:undefined as undefined|(()=>Promise<any>),price:undefined as undefined|((rows:any[])=>Promise<any[]>),rawRead:undefined as undefined|((query:any)=>Promise<any>),censusRate:undefined as undefined|((amount:number)=>any),
@@ -417,48 +430,50 @@ test('a local value rejected by the actual public projection stays unknown after
  }finally{fixture.close();}
 });
 
-test('the existing delivered-price sort orders each loaded power partition without moving cheap unknowns ahead of known',async()=>{
- const priced=(hp:unknown,id:string,totalRub:number)=>({...offer(hp,id),catalogPricingMode:undefined,totalRub});
- const rows=[priced('','unknown-cheap',100000),priced(150,'known-expensive',900000),priced('','unknown-less-cheap',200000),priced(120,'known-cheaper',500000)];
+test('explicit auction-price sort preserves the complete source order across known and unknown power',async()=>{
+ const priced=(hp:unknown,id:string,totalRub:number,finish:number)=>{const base=offer(hp,id);return {...base,catalogPricingMode:undefined,totalRub,sourcePrice:finish,
+  operational:{...base.operational,raw:{...base.operational!.raw,finalPriceJpy:finish}}};};
+ const rows=[priced('','unknown-cheap',100000,700000),priced(150,'known-expensive',900000,300000),priced('','unknown-less-cheap',200000,100000),priced(120,'known-cheaper',500000,500000)];
  for(const sort of ['totalRub','totalRubDesc']){
-  const fixture=await catalogPowerFixture(query=>sourcePage(query,rows,rows.length));
+  const source=sourceOrderedFixture(rows),fixture=await catalogPowerFixture(source.read);
   try{
    const result=await fixture.read({market:'japan',powerTo:'160',sort});
-   const expected=sort==='totalRub'?['known-cheaper','known-expensive','unknown-cheap','unknown-less-cheap']:['known-expensive','known-cheaper','unknown-less-cheap','unknown-cheap'];
+   const expected=sort==='totalRub'?['unknown-less-cheap','known-expensive','known-cheaper','unknown-cheap']:['unknown-cheap','known-cheaper','known-expensive','unknown-less-cheap'];
    assert.deepEqual(result.items.map((item:any)=>item.id),expected.map(id=>'ajes-stats-'+id));
-   assert.deepEqual(result.items.map(japanUnknownPower),[false,false,true,true]);
-   assert.deepEqual(fixture.state.queries.map(query=>query.page),[1,1]);assert.equal(result.hasMore,false);
-   assert.ok(fixture.state.queries.every(query=>query.sort===undefined),'delivered-price sorting must not reorder the raw auction-price candidates');
-  }finally{fixture.close();}
+   assert.deepEqual(result.items.map(japanUnknownPower),[true,false,false,true]);
+   assert.deepEqual(result.items.map((item:any)=>item.japanAuctionPriceJpy),sort==='totalRub'?[100000,300000,500000,700000]:[700000,500000,300000,100000]);
+   assert.ok(result.items.every((item:any)=>item.japanCatalogPriceOrder==='auction'));
+   assert.deepEqual(fixture.state.queries.map(query=>query.page),[1]);assert.equal(result.hasMore,false);
+   assert.ok(fixture.state.queries.every(query=>query.sort===sort),'the selected source order reaches SQL unchanged');
+  }finally{fixture.close();source.close();}
  }
 });
 
-test('power price sorting uses the selected city inside each known/unknown partition',async()=>{
- const priced=(hp:unknown,id:string,totalRub:number,deliveryRub:number)=>({...offer(hp,id),catalogPricingMode:undefined,totalRub,
-  calculationSnapshot:{deliveryPricingBasis:{subtotalRub:totalRub,deliveryRub,percents:[]}}});
- const rows=[priced('','unknown-base-cheaper',500000,0),priced(150,'known-base-cheaper',900000,0),
-  priced('','unknown-city-cheaper',550000,100000),priced(120,'known-city-cheaper',950000,100000)];
+test('auction-price order retains selected-city delivered estimates without ranking by those separate values',async()=>{
+ const priced=(hp:unknown,id:string,totalRub:number,deliveryRub:number,finish:number)=>{const base=offer(hp,id);return {...base,catalogPricingMode:undefined,totalRub,sourcePrice:finish,
+  operational:{...base.operational,raw:{...base.operational!.raw,finalPriceJpy:finish}},calculationSnapshot:{deliveryPricingBasis:{subtotalRub:totalRub,deliveryRub,percents:[]}}};};
+ const rows=[priced('','unknown-base-cheaper',500000,0,100000),priced(150,'known-base-cheaper',900000,0,200000),
+  priced('','unknown-city-cheaper',550000,100000,300000),priced(120,'known-city-cheaper',950000,100000,400000)];
  assert.deepEqual(rows.map(row=>priceCardForCity(row,'Новокузнецк').offer.totalRub),[620000,1020000,570000,970000]);
  for(const sort of ['totalRub','totalRubDesc']){
-  const fixture=await catalogPowerFixture(query=>sourcePage(query,rows,rows.length));
+  const source=sourceOrderedFixture(rows),fixture=await catalogPowerFixture(source.read);
   try{
    const result=await fixture.read({market:'japan',powerTo:'160',sort,city:'Новокузнецк'});
-   const expected=sort==='totalRub'?['known-city-cheaper','known-base-cheaper','unknown-city-cheaper','unknown-base-cheaper']:
-    ['known-base-cheaper','known-city-cheaper','unknown-base-cheaper','unknown-city-cheaper'];
-   assert.deepEqual(result.items.map((item:any)=>item.id),expected.map(id=>'ajes-stats-'+id));
-   assert.deepEqual(result.items.map(japanUnknownPower),[false,false,true,true]);
-   assert.equal(result.hasMore,false);assert.equal(result.total,null,'two K/U observations are not one exact source snapshot');
-  }finally{fixture.close();}
+   const expected=sort==='totalRub'?rows:[...rows].reverse();
+   assert.deepEqual(result.items.map((item:any)=>item.id),expected.map(item=>item.id));
+   assert.deepEqual(result.items.map((item:any)=>priceCardForCity(item,'Новокузнецк').offer.totalRub),expected.map(item=>priceCardForCity(item,'Новокузнецк').offer.totalRub));
+   assert.equal(result.hasMore,false);assert.equal(result.total,null,'source ordering does not turn the scalar into an admitted power count');
+  }finally{fixture.close();source.close();}
  }
 });
 
-test('power price separation preserves other source sort priorities and does not broaden ordinary or invalid queries',async()=>{
- for(const [sort,sourceSort] of [['mileage','mileage'],['year','year'],['totalRubDesc,mileage','mileage'],['year,totalRub','year']]){
+test('power source ordering preserves every selected priority and does not broaden ordinary or invalid queries',async()=>{
+ for(const sort of ['mileage','year','totalRubDesc,mileage','year,totalRub']){
   const fixture=await catalogPowerFixture(query=>{ajesQuery(query);return sourcePage(query,[offer(150,'sort-retained')],1);});
   try{
    const result=await fixture.read({market:'japan',powerTo:'160',sort});
    assert.equal(result.items.length,1);
-   assert.ok(fixture.state.queries.every(query=>query.sort===sourceSort));
+   assert.ok(fixture.state.queries.every(query=>query.sort===sort));
   }finally{fixture.close();}
  }
  const fixture=await catalogPowerFixture(query=>{ajesQuery(query);return sourcePage(query,[offer(150,'ordinary-sort')],1);});
@@ -469,43 +484,38 @@ test('power price separation preserves other source sort priorities and does not
  }finally{fixture.close();}
 });
 
-for(const sort of ['totalRub','totalRubDesc'])test(`power then ${sort} keeps the usable selection instead of scanning an unrelated auction-price prefix`,async()=>{
- // The most/least expensive auction rows do not pass the power filter. A
- // delivered-price button must order the same loaded candidates; it cannot
- // replace them with eight rejected raw FINISH pages and an empty catalogue.
- const known=Array.from({length:48},(_,i)=>({...offer(150,`price-eligible-${i}`),catalogPricingMode:undefined,
+for(const sort of ['totalRub','totalRubDesc'])test(`global power WHERE and ${sort} preserve one auction-price order through ordinary append`,async()=>{
+ // These rejected cheap/expensive rows are removed by the actual source WHERE
+ // before LIMIT. Delivered estimates intentionally have the opposite order.
+ const known=Array.from({length:48},(_,i)=>{const base=offer(150,`price-eligible-${i}`);return {...base,catalogPricingMode:undefined,
   sourcePrice:1000000+i,totalRub:900000+(47-i)*1000,auctionDate:`2026-11-${String(28-Math.floor(i/24)).padStart(2,'0')}T12:00:00Z`,
-  calculationSnapshot:{deliveryPricingBasis:{subtotalRub:900000+(47-i)*1000,deliveryRub:10000,percents:[]}}}));
- const excluded=[100000,4000000].flatMap(base=>Array.from({length:192},(_,i)=>({...offer(300,`price-excluded-${base}-${i}`),
-  catalogPricingMode:undefined,sourcePrice:base+i,totalRub:3000000+i*1000})));
- const fixture=await catalogPowerFixture(query=>{
-  const sql=ajesQuery(query).sql;
-  const rows=[...known,...excluded];
-  if(/order by finish asc/.test(sql))rows.sort((a,b)=>a.sourcePrice-b.sourcePrice);
-  if(/order by finish desc/.test(sql))rows.sort((a,b)=>b.sourcePrice-a.sourcePrice);
-  const offset=(query.page-1)*query.pageSize;
-  return sourcePage(query,rows.slice(offset,offset+query.pageSize));
- });
+  operational:{...base.operational,raw:{...base.operational!.raw,finalPriceJpy:1000000+i}},
+  calculationSnapshot:{deliveryPricingBasis:{subtotalRub:900000+(47-i)*1000,deliveryRub:10000,percents:[]}}};});
+ const excluded=[100000,4000000].flatMap(price=>Array.from({length:192},(_,i)=>{const base=offer(300,`price-excluded-${price}-${i}`);return {...base,
+  catalogPricingMode:undefined,sourcePrice:price+i,totalRub:3000000+i*1000,operational:{...base.operational,raw:{...base.operational!.raw,finalPriceJpy:price+i}}};}));
+ const source=sourceOrderedFixture([...known,...excluded]),fixture=await catalogPowerFixture(source.read);
  try{
   const params={market:'japan',powerTo:'160',city:'Новокузнецк'};
   const original=await fixture.read(params);
   assert.equal(original.items.length,24);
   const first=await fixture.read({...params,sort});
   assert.equal(first.items.length,24,'a price-only sort preserves a populated power selection');
-  assert.deepEqual(new Set(first.items.map((item:any)=>item.id)),new Set(original.items.map((item:any)=>item.id)));
-  assert.deepEqual(first.items.map((item:any)=>item.id),(sort==='totalRub'?known.slice(0,24).reverse():known.slice(0,24)).map(item=>item.id));
+  const ordered=sort==='totalRub'?known:[...known].reverse();
+  assert.deepEqual(first.items.map((item:any)=>item.id),ordered.slice(0,24).map(item=>item.id));
+  assert.match(first.nextCursor,/^j1\./,'an explicit global source price order uses a single continuation phase');
   assert.equal(first.hasMore,true);assert.equal(first.scanLimited,false);assert.equal(first.total,null);
   assert.equal(first.powerFilterSummary.supplierPower,24);assert.equal(first.powerFilterSummary.unknownPower,0);
   const second=await fixture.read({...params,sort,page:'2',after:first.nextCursor});
   assert.equal(second.items.length,24);
-  assert.deepEqual(second.items.map((item:any)=>item.id),(sort==='totalRub'?known.slice(24,48).reverse():known.slice(24,48)).map(item=>item.id));
+  assert.deepEqual(second.items.map((item:any)=>item.id),ordered.slice(24,48).map(item=>item.id));
+  assert.deepEqual([...first.items,...second.items].map((item:any)=>item.japanAuctionPriceJpy),ordered.map(item=>item.sourcePrice));
   assert.equal(new Set([...first.items,...second.items].map(item=>item.id)).size,48,'continuation neither loses nor repeats eligible rows');
   assert.deepEqual(fixture.state.queries.map(query=>query.page),[1,1,2],'price sorting adds no rejected-prefix crawl');
   const reads=fixture.state.queries.length;
   await assert.rejects(fixture.read({...params,sort:sort==='totalRub'?'totalRubDesc':'totalRub',page:'2',after:first.nextCursor}),AjesCursorRefreshRequired);
   await assert.rejects(fixture.read({...params,sort,city:'Москва',page:'2',after:first.nextCursor}),AjesCursorRefreshRequired);
   assert.equal(fixture.state.queries.length,reads,'sort and city remain part of the continuation identity');
- }finally{fixture.close();}
+ }finally{fixture.close();source.close();}
 });
 
 test('a later source refusal preserves 23 available rows as incomplete and retries the exact next source page',async()=>{
@@ -791,18 +801,19 @@ test('projection retains full-record preview vetoes and old compact supplier fac
  assert.equal(japanPreviewParameters(defaultFuel).powerHp,150);assert.equal(offerParameterDraft(defaultFuel,defaultDto).powerHp,'150');
 });
 
-test('power and ordinary queries share only the equivalent raw source selection',()=>{
+test('power and ordinary queries have distinct raw source scope while equivalent pages retain their cache identity',()=>{
  for(const table of ['stats','main'] as const)for(const query of [{},{make:'TOYOTA',page:2},{yearFrom:2020,yearTo:2023},{drive:'awd'}]){
   const ordinary=ajesQuery({table,...query}),power=ajesQuery({table,...query,powerTo:160});
-  assert.equal(ajesSourceCacheSql(power.sql),ajesSourceCacheSql(ordinary.sql));
-  assert.doesNotMatch(power.sql,/pw\s*(?:>=|<=|>|<)/i);
+  assert.notEqual(ajesSourceCacheSql(power.sql),ajesSourceCacheSql(ordinary.sql));
+  assert.match(power.sql,/\(pw\+0\)<=160/i);
+  assert.equal(ajesSourceCacheSql(power.sql),ajesSourceCacheSql(ajesQuery({table,...query,powerTo:160}).sql));
   assert.ok(new URLSearchParams({sql:power.sql}).toString().length<6000);
  }
  const original=ajesSourceCacheSql(ajesQuery({}).sql);
  for(const query of [{table:'main' as const},{page:2},{pageSize:12},{make:'HONDA'},{yearFrom:2020}])assert.notEqual(ajesSourceCacheSql(ajesQuery(query).sql),original);
 });
 
-test('power toggle reuses the same fresh raw page without another supplier request or losing source PW',async()=>{
+test('different power ranges read their own source selection and repeat only the matching fresh page',async()=>{
  let reads=0;
  const client=createAjesClient({password:()=> 'fixture-secret',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>{reads++;return new Response(JSON.stringify([row,{...row,ID:'unknown',PW:''}]));}});
  const ordinary=await client.read({table:'stats'},'127.0.0.1');
@@ -811,24 +822,24 @@ test('power toggle reuses the same fresh raw page without another supplier reque
  const {sourceReceipt:ordinaryReceipt,...ordinaryPage}=ordinary;
  const {sourceReceipt:filteredReceipt,...filteredPage}=filtered;
  const {sourceReceipt:otherReceipt,...otherPage}=otherPower;
- assert.equal(reads,1);assert.deepEqual(filteredPage,ordinaryPage);assert.deepEqual(otherPage,ordinaryPage);
+ assert.equal(reads,3);assert.deepEqual(filteredPage.items,ordinaryPage.items);assert.deepEqual(otherPage.items,ordinaryPage.items);
  assert.ok(ordinaryReceipt&&filteredReceipt&&otherReceipt);
  assert.equal(new Set([ordinaryReceipt.requestId,filteredReceipt.requestId,otherReceipt.requestId]).size,3);
  assert.equal(ordinaryReceipt.supplierAttempted,true);
- for(const receipt of [filteredReceipt,otherReceipt]){
-  assert.equal(receipt.supplierAttempted,false);
-  assert.equal(receipt.queryHash,ordinaryReceipt.queryHash);
-  assert.equal(receipt.observedAt,ordinaryReceipt.observedAt);
- }
+ assert.equal(new Set([ordinaryReceipt.queryHash,filteredReceipt.queryHash,otherReceipt.queryHash]).size,3);
+ for(const receipt of [filteredReceipt,otherReceipt])assert.equal(receipt.supplierAttempted,true);
+ const repeat=await client.read({table:'stats',powerTo:160},'127.0.0.1');
+ assert.equal(reads,3);assert.equal(repeat.sourceReceipt.supplierAttempted,false);
+ assert.equal(repeat.sourceReceipt.queryHash,filteredReceipt.queryHash);assert.equal(repeat.observedAt,filtered.observedAt);
  assert.equal(filtered.items[0].sourcePower,'150');assert.equal(filtered.items[1].sourcePower,'');
 });
 
-test('power query reuses persisted ordinary page, without treating another page or stale result as fresh',async()=>{
- const ordinarySql=ajesQuery({}).sql;
+test('power query reuses only its persisted selection, never ordinary, another-page or stale results as fresh',async()=>{
+ const ordinarySql=ajesSourceCacheSql(ajesQuery({}).sql),powerSql=ajesSourceCacheSql(ajesQuery({powerTo:160}).sql);
  const saved={schemaVersion:2,stale:false,partial:false,items:[ajesLot(row,'stats',false)],page:1,pageSize:24,received:1,observedAt:new Date().toISOString()};
- for(const [patch,expected] of [[{},0],[{page:2},1],[{observedAt:new Date(Date.now()-31*60000).toISOString()},1]] as const){
+ for(const [savedSql,patch,expected] of [[powerSql,{},0],[ordinarySql,{},1],[powerSql,{page:2},1],[powerSql,{observedAt:new Date(Date.now()-31*60000).toISOString()},1]] as const){
   let reads=0;
-  const client=createAjesClient({password:()=> 'fixture-secret',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async sql=>sql===ordinarySql?{...saved,...patch}:null,fetcher:async()=>{reads++;return new Response(JSON.stringify([row]));}});
+  const client=createAjesClient({password:()=> 'fixture-secret',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async sql=>sql===savedSql?{...saved,...patch}:null,fetcher:async()=>{reads++;return new Response(JSON.stringify([row]));}});
   const result=await client.read({powerTo:160},'127.0.0.1');
   assert.equal(reads,expected);assert.equal(result.stale,false);assert.equal(result.items[0].sourcePower,'150');
  }
@@ -857,7 +868,7 @@ test('power requests retain the ordinary source deadline and native failures coo
   const client=createAjesClient({password:()=> 'fixture-secret',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async()=>saved,fetcher:async()=>{reads++;throw new TypeError('private connection failure');}});
   assert.equal((await client.read({powerTo:160},'127.0.0.1')).stale,true);
   assert.ok(deadlines.includes(20_000));assert.ok(!deadlines.includes(4500));
-  now+=10_000;await client.read({powerTo:100},'127.0.0.1');assert.equal(reads,1);
+  now+=10_000;await client.read({powerTo:160},'127.0.0.1');assert.equal(reads,1);
   now+=19_000;await client.read({powerTo:160},'127.0.0.1');assert.equal(reads,1);
   now+=1_001;await client.read({powerTo:160},'127.0.0.1');assert.equal(reads,2);
   await client.read({powerTo:160},'127.0.0.2');assert.equal(reads,3);

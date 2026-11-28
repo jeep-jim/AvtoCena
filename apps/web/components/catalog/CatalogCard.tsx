@@ -124,6 +124,11 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   const priceLabel = o.year ? `${o.year} г.` : "Год уточняется";
   const previewEngineCc = o.engineCc || offer.japanDeliveredPreview?.engineCc;
   const engineLabel = previewEngineCc ? `${previewEngineCc} см³` : isElectric ? "Электромотор" : o.fuelLabel;
+  const auctionPriceJpy=normalizedOffer.market==='japan'&&offer.japanCatalogPriceOrder==='auction'
+    &&Number.isFinite(offer.japanAuctionPriceJpy)&&offer.japanAuctionPriceJpy>0?offer.japanAuctionPriceJpy:null;
+  // Expose the actual globally ordered value without replacing the saved
+  // calculation, city delivery estimate or the original auction result.
+  const auctionPrice=auctionPriceJpy===null?null:<div data-japan-auction-price-jpy={auctionPriceJpy} className="mb-2 text-[15px] font-black text-[var(--ac-text)] sm:text-xl"><span className="text-[10px] font-bold text-[var(--ac-muted)] sm:text-xs">Аукцион: </span>{new Intl.NumberFormat('ru-RU',{maximumFractionDigits:2}).format(auctionPriceJpy)} ¥</div>;
 
   if(publicationWithdrawn(offer))return null;
   if(view==="list") return <article className="ac-catalog-list-row" data-green-corner={isGreenCornerOffer(offer)?"true":undefined}>
@@ -133,7 +138,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
       <div className="ac-list-body"><span>{normalizedOffer.market==="japan"&&!isGreenCornerOffer(offer)?`Лот ${o.lotNumber||"уточняется"}`:o.transmissionLabel==="уточняется"?"КПП уточняется":o.transmissionLabel}</span>{(o.operational?.chassisCode||o.chassisCode)?<ChassisCopy code={String(o.operational?.chassisCode||o.chassisCode)}/>:<small>{o.bodyLabel&&o.bodyLabel!=="уточняется"?o.bodyLabel:"Кузов уточняется"}</small>}</div>
       <div className="ac-list-engine"><span>{engineLabel}</span><small data-japan-supplier-power={supplierPowerLabel?"true":undefined} data-japan-power-unknown={unknownJapanPower||undefined}>{japanDiscoveryPowerLabel||(powerScenario?`${Math.round(powerScenario.horsepower)} л.с. · уточнить`:o.powerHp?`${Number(o.powerHp).toLocaleString("ru-RU")} л.с.`:japanPowerLabel||powerDisplay?.thirtyMinuteLabel||"Мощность уточняется")}</small><small>{o.driveLabel==="уточняется"?"Привод уточняется":o.driveLabel}</small></div>
       <div className="ac-list-mileage"><span>{Number.isFinite(o.mileageKm)?`${Number(o.mileageKm).toLocaleString("ru-RU")} км`:"Пробег уточняется"}</span></div>
-      <div className="ac-list-price">{selectionRequired?<strong>Выбрать модификацию</strong>:<CatalogPrice showSaleDate offer={displayOffer} label="" dense priceClassName="text-[18px]"/>}</div>
+      <div className="ac-list-price">{auctionPrice}{selectionRequired?<strong>Выбрать модификацию</strong>:<CatalogPrice showSaleDate offer={displayOffer} label="" dense priceClassName={auctionPriceJpy===null?"text-[18px]":"text-[14px]"}/>}</div>
     </div><FavoriteToggle offerId={o.id} compact snapshot={snapshot} className="ac-list-favorite"/>
   </article>;
   return (
@@ -152,7 +157,8 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
           {variantLabel ? <div className="mb-2" data-china-variant>
             <p title={variantLabel} className="truncate text-[11px] font-semibold leading-snug text-white/80 sm:text-xs">{variantLabel}</p>
           </div> : null}
-          {selectionRequired ? <div><p className="text-xs text-white/55">{priceLabel}</p><p className="mt-1 text-base font-black text-white">Выбрать модификацию</p></div> : <CatalogPrice offer={displayOffer} label={priceLabel} dense={dense} priceClassName={dense ? "text-[15px] sm:text-[20px] md:text-[22px]" : "text-[20px] sm:text-[22px]"} />}
+          {auctionPrice}
+          {selectionRequired ? <div><p className="text-xs text-white/55">{priceLabel}</p><p className="mt-1 text-base font-black text-white">Выбрать модификацию</p></div> : <CatalogPrice offer={displayOffer} label={priceLabel} dense={dense} priceClassName={auctionPriceJpy!==null?"text-[13px] sm:text-[15px]":dense ? "text-[15px] sm:text-[20px] md:text-[22px]" : "text-[20px] sm:text-[22px]"} />}
           <div className={`${powerInfo?.borderline ? powerStyles.wrapChips : ""} flex flex-nowrap overflow-x-auto whitespace-nowrap font-bold text-white/58 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${dense ? "mt-2 gap-1 text-[8px] sm:mt-3 sm:gap-2 sm:text-[11px]" : "mt-3 gap-2 text-[11px]"}`}>
             {normalizedOffer.market === "japan" && o.driveLabel && o.driveLabel !== "уточняется" ? <span className={tagClass} data-japan-drive={o.drive} title="Привод">{o.driveLabel}</span> : null}
             {o.mileageKm ? <span className={tagClass}><MileageIcon dense={dense} /><span>{new Intl.NumberFormat("ru-RU").format(o.mileageKm)} км</span></span> : null}
@@ -176,3 +182,4 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
     </article>
   );
 }
+

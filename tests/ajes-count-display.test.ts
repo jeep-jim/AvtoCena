@@ -39,13 +39,13 @@ test('visible Japan count never substitutes loaded cards for the whole matching 
  const observedAt='2026-11-28T00:00:00Z';
  const source={total:147867,stale:false,observedAt,upperBound:true};
  const partial=ajesVisibleCount(source,24);
- assert.deepEqual(partial,{text:'Показано 24 · общий итог уточняется',total:undefined,loadedCount:24,status:'partial'});
- assert.equal(ajesVisibleCount(source,48).text,'Показано 48 · общий итог уточняется');
+ assert.deepEqual(partial,{text:'Количество уточняется',total:undefined,loadedCount:24,status:'partial'});
+ assert.equal(ajesVisibleCount(source,48).text,'Количество уточняется');
  assert.equal(ajesVisibleCount({...source,total:0},24).text,partial.text,'the power-count sentinel is not zero inventory');
  assert.equal(ajesVisibleCount(null,24).text,partial.text,'ready cards are not a whole-query count before the aggregate resolves');
  for(const loaded of [undefined,0,-1,NaN,Infinity,2.5]){
   const count=ajesVisibleCount(null,loaded);
-  assert.equal(count.text,loaded===0?'Показано 0 · общий итог уточняется':'Количество уточняется');assert.equal(count.total,undefined);
+  assert.equal(count.text,'Количество уточняется');assert.equal(count.total,undefined);
  }
  const exact={...source,upperBound:false,total:24};
  assert.deepEqual(ajesVisibleCount(exact,24),{text:'24',total:24,loadedCount:24,status:'exact'});
@@ -63,7 +63,7 @@ test('census count proof must agree with the admitted total and cover the same s
  assert.equal(exactAjesCount(summary),73);
  for(const patch of [{complete:false},{admittedTotal:24},{groupedTotal:99},{sourceDistinctTotal:99},{sourceDistinctTotal:undefined},{knownTotal:72},{unknownTotal:-1},{version:2},{kind:'source-count'}]){
   const invalid={...summary,countProof:{...summary.countProof,...patch}};
-  assert.equal(exactAjesCount(invalid),undefined);assert.equal(ajesVisibleCount(invalid,24).text,'Показано 24 · общий итог уточняется');
+  assert.equal(exactAjesCount(invalid),undefined);assert.equal(ajesVisibleCount(invalid,24).text,'Количество уточняется');
  }
  assert.equal(latestAjesCountSummary(summary,null),summary);
  assert.equal(latestAjesCountSummary(summary,{...summary,total:0,upperBound:true}),summary);
@@ -84,8 +84,8 @@ test('real Japan count badge renders exact and partial values without false inve
  const upper={total:147867,stale:false,observedAt:'2026-11-28T00:00:00Z',upperBound:true};
  const partial=render(upper,24);
  assert.match(partial,/data-japan-loaded-count="24"/);assert.match(partial,/data-japan-count-status="partial"/);
- assert.match(partial,/Показано 24 · общий итог уточняется/);assert.doesNotMatch(partial,/data-catalog-market-count=|147867|Загружено/);
- assert.match(render(null,48),/Показано 48 · общий итог уточняется/);
+ assert.match(partial,/Количество уточняется/);assert.doesNotMatch(partial,/data-catalog-market-count=|147867|Загружено/);
+ assert.match(render(null,48),/Количество уточняется/);
  const unknown=render(null);
  assert.match(unknown,/Количество уточняется/);assert.doesNotMatch(unknown,/data-japan-loaded-count=|data-catalog-market-count=|Загружено 0/);
  const exact=render({...upper,total:24,upperBound:false},24);
@@ -110,14 +110,16 @@ test('real Japan count badge renders exact and partial values without false inve
  assert.match(expired,/data-japan-count-status="stale"/);assert.match(expired,/73 · данные на 28 ноября 2026 г./);
  assert.doesNotMatch(expired,/data-catalog-market-count=|data-japan-count-status="exact"/);
 });
-test('power selection never becomes a supplier horsepower SQL predicate',()=>{
+test('power selection narrows the global source candidates before every aggregate and list',()=>{
  for(const market of ['japan'] as const)for(const aggregate of [undefined,'count','models'] as const){
   const q=ajesCatalogQuery({market,powerFrom:'100',powerTo:'160',pageSize:'48'});
   const sql=ajesQuery({...q,aggregate}).sql;
-  assert.doesNotMatch(sql,/pw\s*(?:>=|<=|>|<)/i);
+  assert.match(sql,/trim\(pw\) regexp '\^\[0-9\]\+\$'/i);
+  assert.match(sql,/\(pw\+0\)>=100 and \(pw\+0\)<=160/i);
+  assert.match(sql,/pw is null or not /i,'unknown source power stays included');
  }
  for(const p of [{powerTo:'-1'},{powerFrom:'200',powerTo:'100'},{powerTo:'Infinity'}])assert.throws(()=>ajesQuery(ajesCatalogQuery({market:'japan',...p})));
- assert.doesNotMatch(ajesQuery(ajesCatalogQuery({market:'japan',powerTo:'160'})).sql,/pw\s*(?:>=|<=|>|<)/i);
+ assert.match(ajesQuery(ajesCatalogQuery({market:'japan',powerTo:'160'})).sql,/\(pw\+0\)<=160/i);
  assert.match(ajesQuery(ajesCatalogQuery({market:'japan',sort:'mileage',page:'2',pageSize:'48'})).sql,/order by mileage asc, id asc limit 48,48/);
 });
 

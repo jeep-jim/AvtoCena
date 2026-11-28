@@ -34,7 +34,7 @@ function usableCount(summary?:AjesCountSummary|null):summary is AjesCountSummary
 export function ajesCountText(summary?:AjesCountSummary|null):string {
  summary=agedCount(summary);
  if(!usableCount(summary))return 'Количество уточняется';
- const total=(summary.upperBound?(summary.sourceScopeComplete?'до ':'В источнике: '):'')+formatCatalogCount(summary.total);
+ const total=formatCatalogCount(summary.total)+(summary.upperBound?' в базе аукционов':'');
  if(!summary.stale)return total;
  const observedAt=new Date(summary.observedAt);
  if(!Number.isFinite(observedAt.getTime()))return 'Количество уточняется';
@@ -72,22 +72,25 @@ export function ajesVisibleCount(summary?:AjesCountSummary|null,loaded?:number) 
  // Only a complete candidate scope is an upper bound of the user's selection.
  if(isAjesSourceCountSummary(summary)&&(loadedCount===undefined||summary.total>=loadedCount))
   return {text:ajesCountText(summary),total,loadedCount,status:summary.sourceScopeComplete?'bounded' as const:'source' as const};
- const text=loadedCount===undefined?'Количество уточняется':`Показано ${formatCatalogCount(loadedCount)} · общий итог уточняется`;
+ const text='Количество уточняется';
  return {text,total,loadedCount,status:loadedCount&&loadedCount>0?'partial' as const:'pending' as const};
 }
 /** Full labels are shared by the catalog heading and the mobile filter sheet.
  * Loaded rows remain explicitly labelled; they never populate `total`. */
 export function ajesCountLabel(summary?:AjesCountSummary|null,loaded?:number):string {
  const count=ajesVisibleCount(summary,loaded);
- if(count.status==='exact'||count.status==='bounded')return `Найдено ${count.text}`;
+ if(count.status==='exact')return `Найдено ${count.text}`;
+ if(count.status==='bounded'||count.status==='source')return `В базе аукционов: ${formatCatalogCount(summary!.total)}`;
  if(count.status==='stale')return `По последним данным: ${count.text}`;
  return count.text;
 }
 export function ajesCountExplanation(summary?:AjesCountSummary|null,loaded?:number):string|undefined {
  const count=ajesVisibleCount(summary,loaded);
  const shown=count.loadedCount===undefined?'':`Показано ${formatCatalogCount(count.loadedCount)}.`;
- if(count.status==='bounded')return `Верхняя оценка до проверки характеристик и расчёта доставки. ${shown}`.trim();
- if(count.status==='source')return `Число в исходной выборке. Итог после всех выбранных фильтров пока неизвестен. ${shown}`.trim();
+ // The source aggregate has a concrete, explicit name. It is not a count of
+ // the loaded page and is not relabelled as an exact local delivered-budget
+ // result. Loading progress already appears next to pagination.
+ if(count.status==='bounded'||count.status==='source')return undefined;
  if(count.status==='stale')return `Сохранённое количество; обновление пока недоступно. ${shown}`.trim();
  if(count.status==='exact'&&shown)return shown;
  return undefined;

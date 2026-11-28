@@ -63,12 +63,14 @@ test('case-only directory spellings and lowercased typed literals use the same S
 
 function fixture(t:any,size=96){
  const db=new DatabaseSync(':memory:');t.after(()=>db.close());
- db.exec('create table stats(id text,year integer,auction_type integer,status text,finish integer,marka_name text,model_name text,grade text,auction_date text,power integer)');
- const insert=db.prepare('insert into stats values(?,?,?,?,?,?,?,?,?,?)');
+ db.function('regexp',(pattern:any,value:any)=>value==null?0:Number(new RegExp(String(pattern),'i').test(String(value))));
+ db.exec('create table stats(id text,year integer,auction_type integer,status text,finish integer,marka_name text,model_name text,grade text,auction_date text,power integer,pw text)');
+ const insert=db.prepare('insert into stats values(?,?,?,?,?,?,?,?,?,?,?)');
  const seeded:Array<{id:string;model:string;powerHp:number|null}>=[];
  for(let index=0;index<size;index++){
   const model=['A4','A4 AVANT','A4 ALLROAD QUATTRO'][index%3],powerHp=[120,150,200,null][index%4],id='row-'+String(index).padStart(4,'0');
-  insert.run(id,2021,2,'Sold',120000,'AUDI',model,'','2026-11-27',powerHp);
+  // This cursor fixture uses locally known power and absent source PW.
+  insert.run(id,2021,2,'Sold',120000,'AUDI',model,'','2026-11-27',powerHp,null);
   seeded.push({id:'ajes-stats-'+id,model,powerHp});
  }
  const state={directory:'fresh' as DirectoryState,directoryNames:null as string[]|null,revision:'literal-cursor-fixture',
@@ -156,7 +158,7 @@ test('equivalent directory permutations preserve every nonliteral source spellin
 
 test('new, lost or recovered nonliteral aliases still require refresh before a source LIST',async t=>{
  const {state,db,readPage}=fixture(t);
- db.prepare('insert into stats values(?,?,?,?,?,?,?,?,?,?)').run('zz-alias',2021,2,'Sold',120000,'AUDI','A4L','','2026-11-27',150);
+ db.prepare('insert into stats values(?,?,?,?,?,?,?,?,?,?,?)').run('zz-alias',2021,2,'Sold',120000,'AUDI','A4L','','2026-11-27',150,null);
  for(const [before,after] of [['literal','alias'],['alias','literal'],['alias','missing']] as const){
   state.directory='fresh';state.directoryNames=before==='alias'?['A4','A4 AVANT','A4L']:['A4','A4 AVANT'];
   const first=await readPage({...params,powerTo:'160'},undefined,{includeCount:false});assert(first.nextCursor);

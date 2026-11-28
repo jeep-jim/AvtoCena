@@ -96,13 +96,14 @@ test('a changed Japanese preview aborts the obsolete request and retains previou
  let tree=f.render(f.api.HomeJapanFilteredRail,{params:p});f.effects();assert.equal(requests.length,1,'unchanged render does not request again');
  assert.equal(nodes(tree).find(node=>node.type==='CatalogCard').props.offer.id,'original-japan-car');
  assert.equal(tree.props.count.type,'JapanCatalogCount');
- assert.deepEqual(tree.props.count.props,{queryKey:JSON.stringify(p),summary:count,initialCount:1});
+ assert.deepEqual(tree.props.count.props,{queryKey:JSON.stringify(p),summary:count,initialCount:1,request:p,retryKey:0});
  tree=f.render(f.api.HomeJapanFilteredRail,{params:{...p,make:'Nissan'}});f.effects();
  assert.equal(requests[0].signal.aborted,true);assert.equal(requests.length,2);
  assert.equal(nodes(tree).find(node=>node.type==='CatalogCard').props.offer.id,'original-japan-car');
  assert(nodes(tree).some(node=>String(node.props?.children).includes('Новые условия ещё не применены')));
  assert.equal(tree.props.count.props.summary,null,'the next query cannot inherit the previous selection count');
  assert.equal(tree.props.count.props.initialCount,undefined,'retained old cards are not the new query count');
+ assert.deepEqual(tree.props.count.props.request,{...p,make:'Nissan'},'the independent counter receives the new full filter, not the retained cards query');
  requests[1].resolve(new Response('{}',{status:503}));await turn();
  tree=f.render(f.api.HomeJapanFilteredRail,{params:{...p,make:'Nissan'}});
  assert(nodes(tree).some(node=>node.type==='button'&&node.props.children==='Повторить'));

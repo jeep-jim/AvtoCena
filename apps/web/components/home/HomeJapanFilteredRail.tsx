@@ -42,7 +42,7 @@ export function HomeJapanFilteredRail({params}:{params:JapanRailParams}) {
  const pending=status==='loading'||(!current&&status!=='error');
  const href=japanRailHref(params);
  if(current&&loaded.disabled)return null;
- return <JapanRailFrame params={params} busy={pending} status={pending?'loading':status==='error'?'unavailable':loaded?.items.length?'ready':'empty'} count={<JapanCatalogCount queryKey={queryKey} summary={count} initialCount={current?loaded.items.length:undefined}/>}>
+ return <JapanRailFrame params={params} busy={pending} status={pending?'loading':status==='error'?'unavailable':loaded?.items.length?'ready':'empty'} count={<JapanCatalogCount queryKey={queryKey} summary={count} initialCount={current?loaded.items.length:undefined} request={params} retryKey={attempt}/>}>
   {pending?<CatalogSectionLoading active/>:null}
   {loaded&&!current?<p role="status" className="mb-3 text-sm text-[var(--ac-muted)]">Пока показана предыдущая подборка. Новые условия ещё не применены.</p>:null}
   {status==='error'?<p role="status" className="mb-3 rounded-xl border border-[var(--ac-border)] p-4 text-sm">Не удалось обновить автомобили. <button type="button" className="underline" onClick={()=>setAttempt(value=>value+1)}>Повторить</button> · <Link href={href} className="underline">Открыть каталог</Link></p>:null}

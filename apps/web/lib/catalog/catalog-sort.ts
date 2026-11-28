@@ -9,6 +9,12 @@ export const catalogSortOptions = [
  {value:'mileageDesc',label:'Больше пробег',field:'mileage'},
 ] as const;
 export type CatalogSortTerm=typeof catalogSortOptions[number]['value'];
+/** Japan's complete source order uses the auction price, before delivery. */
+export function catalogSortLabel(term:CatalogSortTerm,auctionPrice=false):string {
+ if(auctionPrice&&term==='totalRub')return 'Дешевле на аукционе';
+ if(auctionPrice&&term==='totalRubDesc')return 'Дороже на аукционе';
+ return catalogSortOptions.find(option=>option.value===term)!.label;
+}
 export function parseCatalogSort(value:string|undefined):CatalogSortTerm[]|null{
  if(!value||value==='updatedAt')return [];
  const terms=value.split(',');const fields=new Set<string>();
@@ -33,3 +39,4 @@ export function compareCatalogTerms<T extends {year?:unknown;mileageKm?:unknown;
  for(const term of terms){const value=(row:T)=>term.startsWith('auctionDate')?Date.parse(String(row.auctionDate||'')):term.startsWith('totalRub')?sortNumber(price(row)):term.startsWith('mileage')?sortNumber(row.mileageKm,true):sortNumber(row.year);const delta=compareSortNumbers(value(a),value(b),term);if(delta)return delta;if(term.startsWith('totalRub')&&!Number.isFinite(value(a))&&!Number.isFinite(value(b))){const seller=compareSortNumbers(sortNumber((a as any).sellerPriceRub),sortNumber((b as any).sellerPriceRub),term);if(seller)return seller;}}
  return 0;
 }
+

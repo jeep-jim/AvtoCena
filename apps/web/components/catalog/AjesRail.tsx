@@ -17,9 +17,9 @@ export async function readAjesRailCount(market:'japan'|'china'|'korea',params:Re
  assertAjesJapanMarket(market);
  try{await assertCollectionEnabled('ajes_japan_feed');return await readAjesCountSummary(JSON.stringify(railQuery(market,params)));}catch{return null;}
 }
-async function RailCount({market,params,previous,initialCount}:{market:'japan'|'china'|'korea';params:Record<string,string|string[]|undefined>;previous?:AjesCountSummary|null;initialCount?:number}){
- const count=latestAjesCountSummary(previous,await readAjesRailCount(market,params));
- return <JapanCatalogCount queryKey={JSON.stringify(railQuery(market,params))} summary={count} initialCount={initialCount}/>;
+async function RailCount({market,params,previous,initialCount,pending}:{market:'japan'|'china'|'korea';params:Record<string,string|string[]|undefined>;previous?:AjesCountSummary|null;initialCount?:number;pending:Promise<AjesCountSummary|null>}){
+ const count=latestAjesCountSummary(previous,await pending);
+ return <JapanCatalogCount queryKey={JSON.stringify(railQuery(market,params))} summary={count} initialCount={initialCount} request={railQuery(market,params)}/>;
 }
 export async function readAjesRailData(market:'japan'|'china'|'korea',params:Record<string,string|string[]|undefined>={}){
  assertAjesJapanMarket(market);
@@ -42,12 +42,12 @@ type RailData=ReturnType<typeof readAjesRailData>;
 export async function AjesRail({market='japan',params={},prepared}:{market?:'japan'|'china'|'korea';params?:Record<string,string|string[]|undefined>;prepared?:RailData}={}){
  assertAjesJapanMarket(market);
  const href=japanRailHref(params);
+ const pendingCount=readAjesRailCount(market,params);
  const {disabled,items,count,unavailable,unsupported,partial,stale,filteredByPage,hasMore,observedAt}=await (prepared||readAjesRailData(market,params));
  if(disabled)return null;
  const total=exactAjesCount(count);
- return <JapanRailFrame params={params} status={unavailable||unsupported?'unavailable':items.length?'ready':'empty'} count={total!==undefined?<JapanCatalogCount queryKey={JSON.stringify(railQuery(market,params))} summary={count} initialCount={items.length}/>:<Suspense fallback={<JapanCatalogCount queryKey={JSON.stringify(railQuery(market,params))} summary={count} initialCount={items.length}/>}><RailCount market={market} params={params} previous={count} initialCount={items.length}/></Suspense>}>
+ return <JapanRailFrame params={params} status={unavailable||unsupported?'unavailable':items.length?'ready':'empty'} count={total!==undefined?<JapanCatalogCount queryKey={JSON.stringify(railQuery(market,params))} summary={count} initialCount={items.length} request={railQuery(market,params)}/>:<Suspense fallback={<JapanCatalogCount queryKey={JSON.stringify(railQuery(market,params))} summary={count} initialCount={items.length} request={railQuery(market,params)} serverPending/>}><RailCount market={market} params={params} previous={count} initialCount={items.length} pending={pendingCount}/></Suspense>}>
   <CatalogSectionLoading/>
-  {String(params.sort||'').split(',').some(term=>term.startsWith('totalRub'))&&<p className="mb-3 text-sm text-[var(--ac-muted)]">По рассчитанной цене в загруженной подборке.</p>}
   {(partial||stale)&&items.length>0?<p role="status" className="mb-3 text-sm text-[var(--ac-muted)]">{stale?japanSavedPreviewText(observedAt):'Показана доступная часть подборки.'} <Link href={href} className="underline">Открыть каталог</Link></p>:null}
   {unsupported?<p role="status" className="text-sm text-[var(--ac-muted)]">Не удалось применить выбранные условия. <Link href={href} className="underline">Открыть каталог</Link></p>:unavailable?<p role="status" className="rounded-xl border border-[var(--ac-border)] p-4 text-sm">Не удалось загрузить автомобили. <Link href={href} className="underline">Открыть каталог</Link></p>:items.length?<div className={MARKET_RAIL_CLASS}>{items.map(offer=><div key={offer!.id} className="min-w-0"><CatalogCard offer={publicOffer(offer!)} compact dense/></div>)}</div>:<p role="status" className="text-sm text-[var(--ac-muted)]">{filteredByPage||partial||hasMore||stale?'В загруженной подборке совпадений нет.':total===0?'По выбранным параметрам автомобили не найдены.':'В этой подборке автомобили пока не отображаются.'} <Link href={href} className="underline">Продолжить поиск</Link></p>}
  </JapanRailFrame>;

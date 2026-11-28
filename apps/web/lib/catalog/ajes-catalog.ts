@@ -3,7 +3,6 @@ import {createHash} from 'node:crypto';
 import {readAjesCensusCount,ajesRequestedCountQuery,ajesRequestedCountQueryHash,ajesSourceScopeSupportsExactCount,AJES_CENSUS_PREDICATE_VERSION,type AjesExactCountSummary} from './ajes-census';
 import {createAjesSourceCountSummary,isAjesSourceCountSummary,AJES_SOURCE_COUNT_PREDICATE_VERSION,type AjesSourceCountSummary} from './ajes-source-count';
 import {captureAjesCountPricingContext} from './ajes-count-pricing-context';
-import {sortCatalogRows} from './market-page';
 import {parseCatalogSort} from './catalog-sort';
 import {japanPreviewParameters} from './japan-preview-parameters';
 import {readFilteredAjesPage,readPowerOrderedAjesPage,ajesPowerEvidenceEpoch,assertAjesPowerCursorEpoch} from './ajes-filtered-page';
@@ -131,11 +130,20 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  assertAjesJapanMarket(params.market);
  const resolveStarted=performance.now();
  const filter=ajesResultFilter(params);
+ // Japan can order the complete source selection by auction FINISH. The
+ // delivered estimate is still calculated for each card and is a different
+ // amount; never reorder individual pages by that estimate afterwards.
+ const sourcePriceOrder=Boolean(parseCatalogSort(String(params.sort||''))?.some(term=>term.startsWith('totalRub')));
+ // Already open pages may still carry the previous two-phase price cursor.
+ // It has no position in this source-price sequence; offer the existing first
+ // page refresh instead of treating a previously valid cursor as bad input.
+ if(sourcePriceOrder&&typeof params.after==='string'&&params.after.startsWith('j2.'))throw new AjesCursorRefreshRequired();
+ const powerOrdered=filter.powerFilter&&!sourcePriceOrder;
  const evidenceSnapshot=await readAjesPublicEvidenceSnapshot();
  const pricingContext=filter.priceFilter?await captureAjesCountPricingContext(evidenceSnapshot):undefined;
  const evidenceEpoch=ajesPowerEvidenceEpoch({runtimeSha:process.env.AVTOCENA_RELEASE_SHA,
   editorialRevision:evidenceSnapshot.editorial.revision,calculationDigest:evidenceSnapshot.calculationIndex?.digest??null});
- if(filter.powerFilter){
+ if(powerOrdered){
   const requested=ajesCatalogQuery(params);
   assertAjesPowerCursorEpoch({page:requested.page||1,pageSize:requested.pageSize||24,after:params.after,evidenceEpoch});
  }
@@ -149,15 +157,7 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  const {query,modelDirectoryUnavailable,makeDirectoryUnavailable}=await resolvedCatalogQuery(JSON.stringify(params));
  const selectionIncomplete=modelDirectoryUnavailable||makeDirectoryUnavailable;
  const sourceScopeUnproven=!ajesSourceScopeSupportsExactCount(query);
- // Delivered-price sorting is explicitly local to the loaded selection. Raw
- // auction FINISH is a different price: sorting that source first can replace
- // a populated power selection with pages of expensive, over-limit cars.
- // Keep the same candidate walk and local/manual power evidence; order its
- // admitted rows by the selected city's delivered price below. Other source
- // sort terms remain intact, and the cursor still binds the full UI query.
- const sourceTerms=filter.powerFilter?parseCatalogSort(query.sort):null;
- const sourceQuery=sourceTerms?.some(term=>term.startsWith('totalRub'))
-  ?{...query,sort:sourceTerms.filter(term=>!term.startsWith('totalRub')).join(',')||undefined}:query;
+ const sourceQuery=query;
  measure?.('query-resolution',performance.now()-resolveStarted);
  const startedAt=Date.now();
  const countStarted=performance.now();
@@ -214,10 +214,10 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
   evidenceEpoch,
   pricingContext:pricingContext?.digest??null,
  });
- const initial=filter.powerFilter||params.after?undefined:await read(query.page||1);
+ const initial=powerOrdered||params.after?undefined:await read(query.page||1);
  let first:Awaited<ReturnType<typeof read>>|undefined=initial;
  const readPage=async(sourcePage:number,phase?:'k'|'u')=>{if(initial&&sourcePage===(query.page||1))return initial;const value=await read(sourcePage,phase);first??=value;return value;};
- const page=filter.powerFilter?await readPowerOrderedAjesPage<Awaited<ReturnType<typeof read>>['items'][number]>({
+ const page=powerOrdered?await readPowerOrderedAjesPage<Awaited<ReturnType<typeof read>>['items'][number]>({
   startedAt,page:query.page||1,pageSize:query.pageSize||24,after:params.after,evidenceEpoch,
   minimumReads:2,cursorKey:cursorQuery,itemKey:offer=>offer.id,known:offer=>!japanUnknownPower(offer),read:readPage,
  }):await readFilteredAjesPage<Awaited<ReturnType<typeof read>>['items'][number]>({startedAt,page:query.page||1,pageSize:query.pageSize||24,after:params.after,
@@ -235,21 +235,20 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  const exact=singleObservation?page.items.length:readyCount&&!readyCount.upperBound&&!readyCount.stale
   &&readyCount.total>=page.items.length?readyCount.total:null;
  const countSummary=singleObservation?{total:page.items.length,upperBound:false,stale:false,observedAt}:readyCount;
- // Preserve the selected batch sort separately within K and U. Sorting a
- // mixed boundary page together would put cheap unknown cars before known K.
- let ordered=page.items;
- if(query.sort&&query.sort!=="updatedAt"){
-  const sort=(rows:typeof page.items)=>sortCatalogRows(rows,query.sort!,String(params.city||""));
-  ordered=filter.powerFilter?[...sort(page.items.filter(offer=>!japanUnknownPower(offer))),...sort(page.items.filter(japanUnknownPower))]:sort(page.items);
- }
- const items=await withCatalogEditorialSnapshot(evidenceSnapshot.editorial,async()=>ordered.map((offer:any)=>{
+ // A chosen source order belongs to the complete query, including subsequent
+ // pages. Appending never moves earlier cars or starts a new price range.
+ // Explicit auction-price ordering also takes precedence over K/U grouping.
+ const items=await withCatalogEditorialSnapshot(evidenceSnapshot.editorial,async()=>page.items.map((offer:any)=>{
   const projected=publicOffer(offer);
   if(filter.powerFilter&&powerIdentity(projected)!==powerIdentity(offer))throw new AjesCursorRefreshRequired();
-  return projected;
+  const auctionPrice=Number(offer.operational?.raw?.finalPriceJpy);
+  return sourcePriceOrder&&Number.isFinite(auctionPrice)&&auctionPrice>0
+   ?{...projected,japanAuctionPriceJpy:auctionPrice,japanCatalogPriceOrder:'auction' as const}:projected;
  }));
- // A source-side filter may omit locally enriched matches. Keep its fresh
- // cursor, but do not present this SQL's end as a complete user selection.
- return {...first,...page,partial:page.partial||selectionIncomplete||sourceScopeUnproven,selectionIncomplete,page:query.page||1,observedAt,filteredByPage:filter.active,total:exact,countSummary,...(filter.powerFilter?{powerFilterSummary:japanPowerFilterSummary(items)}:{}),items,generationId:observedAt,sourceReceipts};
+ // Count scope and transport completeness are separate facts. A completed
+ // filtered source request is not an outage merely because enrichment can
+ // change some local values; do not turn its ordinary empty state into an error.
+ return {...first,...page,partial:page.partial||selectionIncomplete,selectionIncomplete,sourceScopeComplete:!sourceScopeUnproven,page:query.page||1,observedAt,filteredByPage:filter.active,total:exact,countSummary,...(filter.powerFilter?{powerFilterSummary:japanPowerFilterSummary(items)}:{}),items,generationId:observedAt,sourceReceipts};
 }
 /** Add once to totals built from the separate local inventory. A failure is not zero inventory. */
 export async function withAjesCount<T extends {total:number;marketCounts?:Record<string,number>;independentChina?:boolean}>(value:T,params:Record<string,unknown>={}):Promise<T & {countIncomplete?:boolean;marketCountInfo:Record<string,AjesCountSummary|null>}>{

@@ -6,7 +6,7 @@ import {readFilteredAjesPage,readPowerOrderedAjesPage,ajesPowerEvidenceEpoch,ass
 import {AjesCursorRefreshRequired} from '../apps/web/lib/catalog/ajes-query';
 import {AjesUnavailable} from '../apps/web/lib/catalog/ajes-client';
 
-type Row={id:string;known:boolean};
+type Row={id:string;known:boolean;totalRub?:number;operational?:{raw:{finalPriceJpy:number}}};
 type Page={items:Row[];received:number;observedAt:string;partial?:boolean;stale?:boolean};
 const rows=(page:number,count=24,known=true):Row[]=>Array.from({length:count},(_,i)=>({id:`ajes-stats-${page}-${i}`,known}));
 const summary=(total:number,upperBound=true,tag='a')=>({total,upperBound,stale:false,observedAt:new Date().toISOString(),
@@ -15,7 +15,7 @@ const summary=(total:number,upperBound=true,tag='a')=>({total,upperBound,stale:f
 // Exercise the actual catalog-page function with controlled source/count
 // adapters. No application bootstrap, supplier request or copied reader logic.
 function fixture(){
- const state={count:null as any,countReads:0,reads:[] as number[],revision:'editorial-1',calculationDigest:null as string|null,
+ const state={count:null as any,countReads:0,reads:[] as number[],sourceSorts:[] as (string|undefined)[],scopeComplete:true,revision:'editorial-1',calculationDigest:null as string|null,
   pricingDigest:'price-1',source:async(page:number):Promise<Page>=>({items:rows(page),received:24,observedAt:new Date().toISOString()})};
  const query=(params:Record<string,unknown>)=>({table:'stats',make:'AUDI',model:'A4',page:Number(params.page||1),pageSize:24,
   ...(params.powerTo?{powerTo:Number(params.powerTo)}:{}),...(params.sort?{sort:String(params.sort)}:{})});
@@ -28,12 +28,12 @@ function fixture(){
   ajesPowerEvidenceEpoch,assertAjesPowerCursorEpoch,ajesCatalogQuery:query,AjesCursorRefreshRequired,
   japanLocalPowerHp:(row:Row)=>row.known?150:undefined,japanSupplierPower:()=>undefined,japanUnknownPower:(row:Row)=>!row.known,
   resolvedCatalogQuery:async(key:string)=>({query:query(JSON.parse(key)),modelDirectoryUnavailable:false,makeDirectoryUnavailable:false}),
-  ajesSourceScopeSupportsExactCount:()=>true,parseCatalogSort:(value?:string)=>value?value.split(','):[],
+  ajesSourceScopeSupportsExactCount:()=>state.scopeComplete,parseCatalogSort:(value?:string)=>value?value.split(','):[],
   readAjesCountSummary:async()=>{state.countReads++;if(state.count===null)throw new AjesUnavailable('count_unavailable');return state.count;},
-  readAjesPublic:async(q:{page:number})=>{state.reads.push(q.page);return state.source(q.page);},
+  readAjesPublic:async(q:{page:number;sort?:string})=>{state.reads.push(q.page);state.sourceSorts.push(q.sort);return state.source(q.page);},
   safePublicPricing:(row:Row)=>row,hasEncyclopediaCalculationEvidence:()=>false,japanPreviewParameters:()=>({}),
   applyActiveBusinessPricingBatch:async(items:Row[])=>items,readFilteredAjesPage,readPowerOrderedAjesPage,
-  sortCatalogRows:(items:Row[])=>items,withCatalogEditorialSnapshot:async(_index:unknown,work:()=>Promise<any>)=>work(),
+  sortCatalogRows:(items:Row[],sort:string)=>[...items].sort((a,b)=>(sort==='totalRubDesc'?-1:1)*(Number(a.totalRub)-Number(b.totalRub))),withCatalogEditorialSnapshot:async(_index:unknown,work:()=>Promise<any>)=>work(),
   publicOffer:(row:Row)=>row,japanPowerFilterSummary:(items:Row[])=>({shown:items.length}),
  };
  const source=readFileSync(new URL('../apps/web/lib/catalog/ajes-catalog.ts',import.meta.url),'utf8');
@@ -63,6 +63,37 @@ for(const power of [false,true])test(`count availability, value and observation 
  assert.deepEqual(state.reads,[1,1,2,2,2]);
 });
 
+for(const sort of ['totalRub','totalRubDesc'])test(`auction ${sort} retains one source order across pages and unknown power`,async()=>{
+ const {state,readPage}=fixture();
+ const source=Array.from({length:53},(_,i):Row=>({id:`ajes-stats-auction-${i}`,known:i%3!==0,
+  totalRub:500000+((i*37)%53)*10000,operational:{raw:{finalPriceJpy:100000+i*1000}}}));
+ if(sort==='totalRubDesc')source.reverse();
+ state.source=async(page)=>{const items=source.slice((page-1)*24,page*24);return {items,received:items.length,observedAt:new Date().toISOString()};};
+ const params={market:'japan',powerTo:'160',sort,city:'Новокузнецк'};
+ const first=await readPage(params,undefined,{includeCount:false});
+ const second=await readPage({...params,page:'2',after:first.nextCursor},undefined,{includeCount:false});
+ const all=[...first.items,...second.items];
+ assert.deepEqual(all.map(row=>row.id),source.slice(0,48).map(row=>row.id),'no independent re-sort of either page');
+ assert.equal(new Set(all.map(row=>row.id)).size,48);
+ assert.deepEqual(state.sourceSorts,[sort,sort],'source order is retained with the power filter');
+ assert.deepEqual(all.map(row=>row.totalRub),source.slice(0,48).map(row=>row.totalRub),'city calculations are preserved, not replaced by auction prices');
+ assert.deepEqual(all.map(row=>row.japanAuctionPriceJpy),source.slice(0,48).map(row=>row.operational!.raw.finalPriceJpy));
+ assert.ok(all.every(row=>row.japanCatalogPriceOrder==='auction'));
+ assert.ok(first.items.some(row=>!row.known),'explicit price ordering does not postpone unknown power to a different price sequence');
+ assert.match(first.nextCursor,/^j1\./);
+ assert.deepEqual(state.reads,[1,2],'only the two requested source pages are read');
+});
+
+test('an already issued two-phase price cursor requests a fresh first page before new source reads',async()=>{
+ const {state,readPage}=fixture();
+ const epoch=ajesPowerEvidenceEpoch({runtimeSha:'a'.repeat(40),editorialRevision:'editorial-1',calculationDigest:null});
+ const previous=await readPowerOrderedAjesPage<Row>({page:1,pageSize:24,evidenceEpoch:epoch,cursorKey:'previous power and price selection',
+  itemKey:row=>row.id,known:row=>row.known,read:state.source});
+ assert.match(previous.nextCursor!,/^j2\./);
+ await assert.rejects(readPage({market:'japan',powerTo:'160',sort:'totalRubDesc',page:'2',after:previous.nextCursor}),AjesCursorRefreshRequired);
+ assert.deepEqual(state.reads,[]);assert.equal(state.countReads,0);
+});
+
 test('zero counts do not erase fresh rows and large counts do not extend an exhausted list',async()=>{
  const {state,readPage}=fixture();state.count=summary(0,false);
  const first=await readPage({market:'japan'});
@@ -73,6 +104,14 @@ test('zero counts do not erase fresh rows and large counts do not extend an exha
  assert.equal(last.items.length,3);assert.equal(last.hasMore,false);assert.equal(last.nextCursor,null);
  const numbered=await readPage({market:'japan',page:'2'});
  assert.equal(numbered.items.length,3);assert.equal(numbered.hasMore,false,'a scalar count does not require a cursor for a normal numbered request');
+});
+
+test('source count scope cannot turn a successful filtered list into a transport failure',async()=>{
+ const {state,readPage}=fixture();state.scopeComplete=false;
+ state.source=async()=>({items:[],received:0,observedAt:new Date().toISOString()});
+ const result=await readPage({market:'japan',fuel:'diesel'},undefined,{includeCount:false});
+ assert.equal(result.partial,false);assert.equal(result.interrupted,false);assert.equal(result.hasMore,false);
+ assert.equal(result.sourceScopeComplete,false);assert.equal(result.total,null,'no local exact count is manufactured');
 });
 
 test('positive counts preserve useful cards and the failed source offset on a later refusal',async()=>{

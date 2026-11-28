@@ -6,10 +6,10 @@ import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url);
 test('ready cards do not wait for optional brand/model directories; exact selected controls survive',async t=>{
  t.mock.method(Date,'now',()=>Date.parse('2026-11-28T00:15:00Z'));
- let calls=0;const never=new Promise(()=>{});
+ let directoryCalls=0,countCalls=0,pageCalls=0;const order:string[]=[];const never=new Promise(()=>{});
  let readyCount:any={total:1,stale:false,upperBound:false,observedAt:'2026-11-28T00:00:00Z'},countResult:any=never,readOptions:any,countKey='';
  let items:any[]=[{id:'car1',make:'Toyota',model:'COROLLA'}],pageFlags:Record<string,boolean>={};
- (globalThis as any).__ajesTest={readAjesCatalogPage:async(_q:any,_measure:any,options:any)=>{readOptions=options;return {countSummary:readyCount,page:1,total:items.length,items,hasMore:false,...pageFlags};},readAjesMakes:()=>{calls++;return never;},readAjesDirectory:()=>{calls++;return never;},readAjesCountSummary:(key:string)=>{calls++;countKey=key;return countResult;}};
+ (globalThis as any).__ajesTest={readAjesCatalogPage:async(_q:any,_measure:any,options:any)=>{pageCalls++;order.push('page');readOptions=options;return {countSummary:readyCount,page:1,total:items.length,items,hasMore:false,...pageFlags};},readAjesMakes:()=>{directoryCalls++;return never;},readAjesDirectory:()=>{directoryCalls++;return never;},readAjesCountSummary:(key:string)=>{countCalls++;order.push('count');countKey=key;return countResult;}};
  try{
   const built=await build({entryPoints:['apps/web/components/catalog/AjesCatalog.tsx'],bundle:true,platform:'node',format:'cjs',write:false,jsx:'automatic',external:['react','react/jsx-runtime'],plugins:[{name:'dependencies',setup(b){
    b.onResolve({filter:/.*/},args=>args.path==='node:crypto'?{path:args.path,external:true}:args.kind==='entry-point'||args.path==='react'||args.path==='react/jsx-runtime'?undefined:{path:args.path,namespace:'fixture'});
@@ -36,7 +36,9 @@ test('ready cards do not wait for optional brand/model directories; exact select
   const mod={exports:{} as any};new Function('require','module','exports',built.outputFiles[0].text)(require,mod,mod.exports);
   let timer:ReturnType<typeof setTimeout>;
   const root:any=await Promise.race([mod.exports.AjesCatalog({params:{market:'japan',make:'Toyota',city:'Новокузнецк'}}),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('ready cards blocked by directory')),300);})]).finally(()=>clearTimeout(timer!));
-  assert.equal(calls,0,'metadata must begin in a separate streamed boundary, not ahead of list');
+  assert.equal(directoryCalls,0,'metadata must begin in a separate streamed boundary, not ahead of list');
+  assert.equal(countCalls,1,'the independent scalar starts without waiting for LIST');
+  assert.deepEqual(order,['count','page'],'COUNT and LIST start together; ready cards do not await the unresolved count');
   assert.deepEqual(readOptions,{includeCount:false},'ready cards do not wait for the independent count; a complete single-LIST summary is still shared');
   const walk=(node:any):any[]=>!node||typeof node!=='object'?[]:[node,...Object.values(node.props||{}).flatMap(v=>Array.isArray(v)?v.flatMap(walk):walk(v))];
   const nodes=walk(root),filters=nodes.find(n=>n.props?.auctionResults);
@@ -49,19 +51,30 @@ test('ready cards do not wait for optional brand/model directories; exact select
    {id:'ajes-stats-supplier',market:'japan',make:'Toyota',model:'COROLLA',japanSupplierPower:{offerId:'ajes-stats-supplier',hp:160,unit:'hp',source:'ajes_pw'}},
    {id:'ajes-stats-unknown',market:'japan',make:'Toyota',model:'COROLLA',japanPowerUnknown:true},
   ];
+  let resolveCount!:(value:any)=>void;countResult=new Promise(resolve=>{resolveCount=resolve;});
   const lateRoot=await mod.exports.AjesCatalog({params:{market:'japan',powerTo:'160',city:'Новокузнецк'}});
-  assert.equal(calls,0,'late count does not precede ready cards');
+  assert.equal(directoryCalls,0,'late metadata does not precede ready cards');
+  assert.equal(countCalls,2,'each selection starts one independent count without holding cards');
   const lateNodes=walk(lateRoot),late=lateNodes.find(n=>n.type?.name==='AjesIndependentCount');assert.ok(late);
   assert.equal(lateNodes.some(n=>n.props?.['data-japan-power-summary-page']!==undefined),false,'the removed page warning must not be rendered');
   assert.ok(lateNodes.some(n=>n.type?.name==='JapanCatalogCount'&&n.props.initialCount===3),'the visible partial count includes the three actually loaded cars');
   assert.equal(lateNodes.find(n=>n.props?.initialCount===3)?.props.resultCountLabel,undefined,'no uncertain count label is passed to the footer');
   assert.ok(lateNodes.some(n=>n.props?.initialCount===3),'all three actual cards, including unknown power, remain visible');
   assert.ok(lateNodes.some(n=>n.props?.initialCards?.some?.((card:any)=>card.props.offer.japanPowerUnknown===true)));
-  countResult=Promise.resolve({total:42,stale:false,upperBound:false,observedAt:'2026-11-28T00:00:00Z'});
+  assert.ok(lateNodes.some(n=>n.type?.name==='JapanCatalogCount'&&n.props.serverPending===true&&n.props.request.powerTo==='160'),'the pending server fallback reuses the same-filter cache without duplicating the in-flight count');
+  resolveCount({total:42,stale:false,upperBound:false,observedAt:'2026-11-28T00:00:00Z'});
   const counterNodes=walk(await late.type(late.props));
   assert.ok(counterNodes.some(n=>n.props?.text==='42'&&n.props?.total===42),'late aggregate includes the numeric pagination value');
   assert.ok(lateNodes.some(n=>n.props?.resultQueryKey===countKey),'pagination and independent aggregate use the identical query identity');
   assert.deepEqual(JSON.parse(countKey),lateNodes.find(n=>n.props?.auctionResults).props.initial);
+  assert.deepEqual(counterNodes.find(n=>n.type?.name==='JapanCatalogCount')?.props.request,JSON.parse(countKey),'a finished SSR boundary supplies the full filter for bounded client recovery');
+  assert.equal(countCalls,2,'resolving the boundary reuses the already started scalar');
+  assert.equal(pageCalls,2,'count completion never rereads the page');
+  const broadNodes=walk(await mod.exports.AjesCatalog({params:{city:'Казань'}}));
+  const broad=broadNodes.find(n=>n.type?.name==='AjesIndependentCount');assert.ok(broad);
+  assert.deepEqual(JSON.parse(countKey),{city:'Казань',market:'japan'},'the general Japan page starts COUNT without requiring a make/model');
+  assert.deepEqual(walk(await broad.type(broad.props)).find(n=>n.type?.name==='JapanCatalogCount')?.props.request,{city:'Казань',market:'japan'});
+  assert.equal(pageCalls,3);assert.equal(countCalls,3);
   readyCount={total:0,stale:false,upperBound:true,observedAt:'2026-11-28T00:00:00Z'};
   const partialNodes=walk(await mod.exports.AjesCatalog({params:{market:'japan',powerTo:'160',sort:'totalRubDesc',city:'Новокузнецк'}}));
   assert.ok(partialNodes.some(n=>n.type?.name==='JapanCatalogCount'&&n.props.initialCount===3&&n.props.summary===readyCount));
@@ -78,4 +91,3 @@ test('ready cards do not wait for optional brand/model directories; exact select
   assert.equal(scanning.find(n=>n.type?.name==='CatalogLoadMore')?.props.initialHasMore,true);
  }finally{delete (globalThis as any).__ajesTest;}
 });
-

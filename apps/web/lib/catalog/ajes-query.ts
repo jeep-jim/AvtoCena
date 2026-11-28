@@ -1,6 +1,7 @@
 import type {CalculationIndex} from '../encyclopedia/calculation-index';
 import {pickupSourceCandidateSql} from './pickup-body';
 import {japanDriveSql} from './japan-drive';
+import {japanSourcePowerPredicate} from './japan-source-power-query';
 import {auctionSaleRange} from "./auction-sale-period";
 import {japanMakeSqlExclusion,japanVehicleTypeExcluded,japanVehicleFamilySqlExclusion,japanVehicleFamilyCacheSqlExclusion,japanHeavyVehicleSqlExclusion} from './japan-vehicle-policy';
 import {assertAjesJapanMarket} from './ajes-access-policy';
@@ -32,7 +33,7 @@ export const AJES_CENSUS_REQUIRED_FIELDS = AJES_CENSUS_FIELDS.slice(0,12);
 export type AjesQuery = {pickup?:boolean;salePeriod?:string; table?: AjesTable; aggregate?: 'count'|'models'|'makes'|'colors'|'census'; countIdentity?:boolean; censusFields?:AjesCensusField[]; correctionId?:string; sort?: string; color?:string; fuel?:string; transmission?:string; drive?:string; auctionGrade?:string; id?: string; make?: string; resolvedMakes?:AjesResolvedMakes; model?: string; modelFamilies?:string; resolvedModels?:AjesResolvedModels; chassis?:string; frameNumber?:string; lotNumber?:string; sourcePriceTo?:number; powerFrom?:number; powerTo?:number; yearFrom?: number; yearTo?: number; mileageFrom?:number; mileageTo?: number; engineFrom?:number; engineTo?:number; page?: number; pageSize?: number};
 const keys = new Set(['pickup','salePeriod','aggregate','countIdentity','censusFields','correctionId','sort','color','fuel','transmission','drive','auctionGrade','table','id','make','resolvedMakes','model','modelFamilies','resolvedModels','chassis','frameNumber','lotNumber','sourcePriceTo','powerFrom','powerTo','yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page','pageSize']);
 /** These fixed predicates select the same raw rows. Sharing their cache identity
- * lets local power changes reuse an already requested page without another AJ read.
+ * reuses only semantically equivalent raw source pages, including power scope.
  * Keep the actual compact SQL on the wire for the existing URI-size boundary.
  */
 export function ajesSourceCacheSql(sql:string):string {
@@ -137,10 +138,12 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   if(q.powerFrom!==undefined||q.powerTo!==undefined){
     const low=integer(q.powerFrom,1,1,2500),high=integer(q.powerTo,2500,1,2500);
     if(low>high)throw new AjesInputError();
-    // PW is integer hp, but source SQL cannot preserve contradictory local/manual
-    // overrides. Keep the raw candidate page shared with the unfiltered query;
-    // apply power and explicit unknown inclusion after local enrichment.
-    // The bounded post-filter below prevents an unbounded scan of supplier pages.
+    // COUNT and LIST share this global candidate scope. Local/manual cohorts
+    // and unknown PW remain included; final admission still uses enriched facts.
+    // Reserve the same URI envelope for every aggregate/page/sort of this WHERE.
+    const budget=Math.max(0,5600-new URLSearchParams({sql:where.join(' and ')}).toString().length);
+    const predicate=japanSourcePowerPredicate(low,high,driveIndex,budget);
+    if(predicate.sql)where.push(predicate.sql);
   }
   if(q.aggregate!==undefined&&!['count','models','makes','colors','census'].includes(q.aggregate))throw new AjesInputError();
   if(q.censusFields!==undefined&&q.aggregate!=='census')throw new AjesInputError();
@@ -231,3 +234,4 @@ export function ajesCatalogQuery(params:Record<string,unknown>):AjesQuery {
  const sort=first(params.sort);if(sort)q.sort=sort as AjesQuery['sort'];
  return q;
 }
+
