@@ -2,6 +2,13 @@
 
 Checkpoint: **28.11.2026, Asia/Krasnoyarsk**. [Выпуск Японии №38](https://github.com/jeep-jim/AvtoCena/actions/runs/46137713595) **accepted / completed / published**, принят в **18:19:40.218 по Красноярску**. Исправлена обычная подгрузка Audi/A4 с фильтром «до 160 л.с.»; счётчик виден. Общий точный итог после всех локальных фильтров остаётся незавершённым.
 
+## Неудачный выпуск №39 и следующий проверенный кандидат (28.11.2026)
+
+- [Релиз №39](https://github.com/jeep-jim/AvtoCena/actions/runs/46147343921) завершился `failure` и автоматическим `rolled_back` на `failedStage=power_api` для candidate runtime `21d1ad901dff0e51c904dc7dee22dfd534550d18`. Контроллер `278c936da0fb1ca622682ed718c100468acca8d8`. Источник ошибки арифметического выражения у AJ окончательно не доказан; исходный runtime `5b1e513dc9af3735e3b757c6fe7da763aa92837e` удержан. Это **не успешная публикация**.
+- Подготовлен **неопубликованный** код в [чистой ветке](https://github.com/jeep-jim/AvtoCena/tree/fix/japan-aj-pw-supplier-ready-20261128), commit `6430fc01a1e60ee9ff870817e60b466a7adf2e30`. Изолированно от принятого runtime изменены только `apps/web/lib/catalog/japan-source-power-query.ts` и `tests/japan-source-power.test.ts`; `pw+0` заменено на `pw*1` без изменения отбора и исключений, ожидаемая совместимость пока гипотеза.
+- [Офлайн-проверка](https://github.com/jeep-jim/AvtoCena/actions/runs/46151390270): **64/64 тестов**, без failures/skips, `npm run typecheck` успешно. Содержимое двух файлов в чистой ветке по SHA точно совпадает с проверенным кандидатом.
+- **Блокер:** нет подтверждённого ответа реального AJ API на новый числовой предикат. До ограниченного разрешённого supplier-compatibility теста и полной обычной live-приёмки (счётчик, фильтры, 24→48, сортировки, цены, Back/скролл) новый код **не публиковать**. Факт предыдущего принятия №38 ниже сохраняется.
+
 ## Опубликованная версия
 
 - Runtime `5b1e513dc9af3735e3b757c6fe7da763aa92837e`, tree `ac4c70c441c161e22599c27f45dd60cce9dd117b`; image `sha256:164288e7d6f3836982d440e255727a7bcfa566b2c98acd54f31e0e0f724540d6`.
