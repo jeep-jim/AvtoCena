@@ -32,9 +32,9 @@ export async function readAjesRailData(market:'japan'|'china'|'korea',params:Rec
  try{
   // Reuse the normal first catalogue page for this six-card preview. A distinct
   // twelve-row query would need a separate supplier/cache read for the same visit.
-  // Its counter covers the whole selection, independently of this six-card
-  // presentation. The normal reader retains usable rows on a count outage.
-  const page=await readAjesCatalogPage(railQuery(market,params));
+  // Keep the separately streamed selection counter from delaying ready cards.
+  // A complete single-LIST count from the page is still retained below.
+  const page=await readAjesCatalogPage(railQuery(market,params),undefined,{includeCount:false});
   return {disabled:false,items:page.items.slice(0,6),count:page.countSummary,unavailable:false,unsupported:false,partial:Boolean(page.partial),stale:Boolean(page.stale),filteredByPage:page.filteredByPage,hasMore:page.hasMore,observedAt:page.observedAt};
  }catch(error){return {disabled:false,items:[],count:null,unavailable:true,unsupported:error instanceof AjesFilterUnavailable,partial:false,stale:false,filteredByPage:false,hasMore:false,observedAt:undefined};}
 }

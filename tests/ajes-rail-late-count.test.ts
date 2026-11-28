@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {createRequire} from 'node:module';
+import {renderToStaticMarkup} from 'react-dom/server';
 const require=createRequire(import.meta.url);
 test('market cards remain ready and their late count resolves with exactly the same filtered query',async()=>{
  let resolveCount:(v:any)=>void=()=>{};
@@ -25,8 +26,11 @@ test('market cards remain ready and their late count resolves with exactly the s
    const nodes:any[]=[];function walk(node:any){if(Array.isArray(node))return node.forEach(walk);if(!node||typeof node!=='object')return;nodes.push(node);walk(node.props?.children);walk(node.props?.count);}walk(tree);
    assert.equal(nodes.filter(x=>x.type?.name==='CatalogCard').length,1);
    const late=nodes.find(x=>x.type?.name==='RailCount');assert.ok(late,'late count remains mounted after cards returned');
-   const pending=late.type(late.props);resolveCount({total:20890,upperBound:false,stale:false,observedAt:'now'});
-   const counter=await pending;assert.equal(counter.props.total,20890);
+   const pending=late.type(late.props);resolveCount({total:20890,upperBound:false,stale:false,observedAt:new Date().toISOString()});
+   const counter=renderToStaticMarkup(await pending);
+   assert.match(counter,/data-catalog-market-count="20890"/);
+   assert.match(counter,/data-japan-count-status="exact"/);
+   assert.match(counter,/20\s?890/);
    assert.deepEqual(JSON.parse(state.countKeys.at(-1)!),state.queries.at(-1));
   }
  }finally{delete (globalThis as any).__railFixture;}

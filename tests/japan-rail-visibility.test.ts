@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 import {build} from 'esbuild';
-import {createElement,isValidElement} from 'react';
+import {cloneElement,isValidElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {japanSupplierPowerLabel,japanUnknownPower} from '../apps/web/lib/catalog/japan-source-power';
 
@@ -11,15 +11,17 @@ async function resolved(node:any):Promise<any> {
  if(Array.isArray(node))return Promise.all(node.map(resolved));
  if(!isValidElement(node))return node;
  const element:any=node;
- if(typeof element.type==='function')return resolved(await element.type(element.props));
+ // Await server boundaries only. React must invoke synchronous components so
+ // the actual JapanCatalogCount client hooks have a valid dispatcher.
+ if(typeof element.type==='function'&&element.type.constructor.name==='AsyncFunction')return resolved(await element.type(element.props));
  const props={...element.props};
- if('children' in props)props.children=await resolved(props.children);
- return createElement(element.type,props);
+ for(const key of ['children','count','fallback'])if(key in props)props[key]=await resolved(props[key]);
+ return cloneElement(element,props);
 }
 async function fixture(t:any){
  const state={control:'enabled',pageReads:[] as any[],countReads:[] as any[],cardOffers:[] as any[],
   page:{items:[] as any[],countSummary:null as any,received:0,pageSize:24,hasMore:false,partial:false,stale:false,filteredByPage:false,observedAt:'2026-11-26T04:30:00Z'},
-  count:{total:660813,upperBound:false,stale:false,observedAt:'2026-11-26T04:30:00Z'}};
+  count:{total:660813,upperBound:false,stale:false,observedAt:new Date().toISOString()}};
  (globalThis as any).__japanRailVisibility=state;t.after(()=>{delete (globalThis as any).__japanRailVisibility;});
  const mocks:Record<string,string>={
   'collection-controls':`export class CollectionDisabledError extends Error{};export const assertCollectionEnabled=async()=>{const state=globalThis.__japanRailVisibility;if(state.control==='disabled')throw new CollectionDisabledError();if(state.control==='unreadable')throw Error('settings storage unavailable');};`,
@@ -43,6 +45,7 @@ test('enabled empty Japanese preview keeps its title, independently known count 
  const params={city:'Новокузнецк',powerTo:'160',make:'Toyota',page:'6',pageSize:'12',after:'old-cursor',source:'existing',market:'korea|japan'};
  const markup=await html(await api.AjesRail({params}));
  assert.match(markup,/aria-label="Япония"/);assert.match(markup,/660\s?813|660&#x27;813/);
+ assert.match(markup,/data-catalog-market-count="660813"/);assert.match(markup,/data-japan-count-status="exact"/);
  assert.match(markup,/В этой подборке автомобили пока не отображаются/);
  assert.doesNotMatch(markup,/По выбранным параметрам автомобили не найдены/);
  const href=new URL(api.japanRailHref(params),'https://avtocena.com');

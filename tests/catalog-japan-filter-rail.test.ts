@@ -24,7 +24,9 @@ test('all-market filtered results retain Japan, filtered stock and navigation co
  };
  const ui=['GreenCornerCatalog','AjesCatalog','AjesRail','JapanSectionTabs','GreenCornerRail','PublicHeader','BrandLogoRail','CatalogLoadMore','CatalogCard','CatalogMarketFlag','CatalogFilters','CurrencyRatesStrip'];
  for(const name of ui)mocks[name]=`export function ${name}(){return null;}`;
- mocks.AjesRail+=`export const readAjesRailData=async()=>({count:null,items:[{id:"one"}]});export const readAjesRailCount=async(market,params)=>{if(params.make!=="Volkswagen"||params.city!=="Новокузнецк")throw Error("lost filter");return {total:market==="japan"?10:market==="korea"?20:30,stale:false,upperBound:market==="china",observedAt:"now"};};export function CatalogEmptyResults(){return null;}`;
+ // A positive supplier aggregate currently has no coherent admitted proof.
+ // The late rail counter therefore remains unavailable, independently of cards.
+ mocks.AjesRail+=`export const readAjesRailData=async()=>({count:null,items:[{id:"one"}]});export const readAjesRailCount=async(market,params)=>{if(market!=="japan"||params.make!=="Volkswagen"||params.city!=="Новокузнецк"||params.powerTo!=="160"||params.sort!=="totalRub")throw Error("lost filter or unexpected market");return null;};export function CatalogEmptyResults(){return null;}`;
  const output=await build({entryPoints:['apps/web/components/catalog/CatalogContent.tsx'],bundle:true,platform:'node',format:'cjs',write:false,loader:{'.css':'empty'},jsx:'automatic',packages:'external',plugins:[{name:'fixtures',setup(b){b.onResolve({filter:/.*/},a=>{const n=a.path.split('/').at(-1)!;if(mocks[n])return {path:n,namespace:'fixtures'};});b.onLoad({filter:/.*/,namespace:'fixtures'},a=>({contents:mocks[a.path],loader:'js'}));}}]});
  const m={exports:{} as any};new Function('require','module','exports',output.outputFiles[0].text)(require,m,m.exports);
  const params={make:'Volkswagen',powerTo:'160',sort:'totalRub',city:'Новокузнецк'};
@@ -33,11 +35,12 @@ test('all-market filtered results retain Japan, filtered stock and navigation co
  assert.equal(elements.filter(x=>x.type?.name==='ResolvedCatalogCount').length,1,'one public counter across layout slots');
  assert.equal(elements.filter(x=>x.type?.name==='BrandLogoRail').length,1,'one complete public brand rail');
  const counter=elements.find(x=>x.type?.name==='ResolvedCatalogCount');
- const summary=await counter.props.summary;assert.deepEqual(summary,{total:11,countIncomplete:false});
- const label=await counter.type(counter.props);assert.match(renderToStaticMarkup(label),/11/);
+ const summary=await counter.props.summary;assert.deepEqual(summary,{total:1,countIncomplete:true});
+ const label=await counter.type(counter.props);assert.match(renderToStaticMarkup(label),/Общее количество уточняется/);
+ assert.doesNotMatch(renderToStaticMarkup(label),/data-catalog-result-value/,'the confirmed stock subset is not a full inventory count');
  const dealer={id:'test',markets:['japan'],href:'/dealers/test',preview:false};
  elements.length=0;walk(await m.exports.CatalogContent({params,dealer,embedded:true}));
- assert.deepEqual(await elements.find(x=>x.type?.name==='ResolvedCatalogCount').props.summary,{total:11,countIncomplete:false});
+ assert.deepEqual(await elements.find(x=>x.type?.name==='ResolvedCatalogCount').props.summary,{total:1,countIncomplete:true});
  elements.length=0;walk(tree);
  const rails=elements.filter(x=>x.type?.name==='AjesRail');
  assert.equal(rails.length,1);assert.deepEqual(rails.find(x=>!x.props.market).props.params,params);

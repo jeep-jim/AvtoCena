@@ -26,6 +26,9 @@ async function fixture(t:any,entry:'home'|'preview'){
   'runtime-config':`export const PUBLIC_CATALOG_MARKETS=['china','japan','korea','uae','europe','georgia'];export const CATALOG_MARKET_LABELS={china:'Китай',japan:'Япония',korea:'Корея',uae:'ОАЭ',europe:'Европа',georgia:'Грузия'};`,
   'DealerBrowsingContext':`export const DealerLink='a';`,
   'link':`export default 'a';`,
+  // This hook harness exercises the preview parent; its client count child is
+  // rendered with real React in ajes-count-display and rail visibility tests.
+  'JapanCatalogCount':`export const JapanCatalogCount='JapanCatalogCount';`,
  };
  for(const [file,exported] of Object.entries({GreenCornerRail:'GreenCornerRail',BrandLogoRail:'BrandLogoRail',CatalogCard:'CatalogCard',CatalogMarketFlag:'CatalogMarketFlag',CurrencyRatesStrip:'CurrencyRatesStrip',PublicLeadCaptureV2:'GenericLeadBanner',VehicleModelSearch:'VehicleModelSearch',SpecialRail:'SpecialRail',BuyerGallery:'BuyerGallery',CitySelector:'CitySelector',PublicHeader:'PublicHeader'}))mocks[file]=`export const ${exported}='${exported}';`;
  if(entry==='home')mocks.HomeJapanFilteredRail=`export const HomeJapanFilteredRail='HomeJapanFilteredRail';`;
@@ -88,13 +91,18 @@ test('a changed Japanese preview aborts the obsolete request and retains previou
  t.mock.method(globalThis,'fetch',async(_input,options)=>new Promise<Response>(resolve=>requests.push({signal:options!.signal as AbortSignal,resolve})));
  const p={city:'Казань',fuel:'electric'};
  f.render(f.api.HomeJapanFilteredRail,{params:p});f.effects();assert.equal(requests.length,1);
- requests[0].resolve(new Response(JSON.stringify({ok:true,items:[{id:'original-japan-car'}],hasMore:true,stale:false,partial:false}),{status:200}));await turn();
+ const count={total:73,stale:false,upperBound:false,observedAt:new Date().toISOString()};
+ requests[0].resolve(new Response(JSON.stringify({ok:true,items:[{id:'original-japan-car'}],countSummary:count,hasMore:true,stale:false,partial:false}),{status:200}));await turn();
  let tree=f.render(f.api.HomeJapanFilteredRail,{params:p});f.effects();assert.equal(requests.length,1,'unchanged render does not request again');
  assert.equal(nodes(tree).find(node=>node.type==='CatalogCard').props.offer.id,'original-japan-car');
+ assert.equal(tree.props.count.type,'JapanCatalogCount');
+ assert.deepEqual(tree.props.count.props,{queryKey:JSON.stringify(p),summary:count,initialCount:1});
  tree=f.render(f.api.HomeJapanFilteredRail,{params:{...p,make:'Nissan'}});f.effects();
  assert.equal(requests[0].signal.aborted,true);assert.equal(requests.length,2);
  assert.equal(nodes(tree).find(node=>node.type==='CatalogCard').props.offer.id,'original-japan-car');
  assert(nodes(tree).some(node=>String(node.props?.children).includes('Новые условия ещё не применены')));
+ assert.equal(tree.props.count.props.summary,null,'the next query cannot inherit the previous selection count');
+ assert.equal(tree.props.count.props.initialCount,undefined,'retained old cards are not the new query count');
  requests[1].resolve(new Response('{}',{status:503}));await turn();
  tree=f.render(f.api.HomeJapanFilteredRail,{params:{...p,make:'Nissan'}});
  assert(nodes(tree).some(node=>node.type==='button'&&node.props.children==='Повторить'));
