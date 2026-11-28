@@ -14,7 +14,7 @@ jobs:
       github.repository == 'jeep-jim/AvtoCena' &&
       github.ref == 'refs/heads/main' &&
       github.event_name == 'push' &&
-      github.event.head_commit.message == 'Inspect owner-requested Mouse HTTPS access (2026-11-28)'
+      github.event.head_commit.message == 'Activate owner-requested Mouse HTTPS access (2026-11-28)'
     runs-on: ubuntu-latest
     timeout-minutes: 8
     environment: regcloud-staging
@@ -843,9 +843,9 @@ jobs:
               raise SystemExit(main())
           MOUSE_TRANSACTION_PY
           printf '%s  %s\n' 'd410b2cfca45ae7ccc07c1e142840c21d1bdca98e626dd29d2bcb442c28a1e43' "$root_work/configure-https.py" '402834e1a00f6371315453fcfeeb966cc9a659d853fe8f5ba57f7d1ca8b0534d' "$root_work/https-admin-transaction.py" | sha256sum --check --status
-          /usr/bin/python3 -I "$root_work/https-admin-transaction.py" --inspect --installer "$root_work/configure-https.py"
+          /usr/bin/python3 -I "$root_work/https-admin-transaction.py" --apply --expected-manifest 669e7a9ba97aed595c58bf52f5285c84640ae352ee46379fd43df6c376daa7e9 --installer "$root_work/configure-https.py"
           MOUSE_PAYLOAD_PART_3
-      - name: Inspect existing Mouse HTTPS access
+      - name: Activate only the two reviewed Mouse HTTPS routes
         shell: bash
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
@@ -856,7 +856,7 @@ jobs:
           hosts_file=$(mktemp)
           payload_file="$RUNNER_TEMP/mouse645-admin-payload.sh"
           trap 'rm -f "$key_file" "$hosts_file" "$payload_file"' EXIT
-          printf '%s  %s\n' '4d70d51861adef7752426cdc548c94e6b122a06abaf9328fb5fd8e780176adcb' "$payload_file" | sha256sum --check --status
+          printf '%s  %s\n' 'adc124bc62b408fb1ddfd15fb819c7ff396fb0b131d4d104bab6cc0b8e5321a8' "$payload_file" | sha256sum --check --status
           printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
           unset SSH_PRIVATE_KEY
           ssh-keygen -y -f "$key_file" >/dev/null
@@ -867,7 +867,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: mouse645-https-inspect-receipt
+          name: mouse645-https-apply-receipt
           path: ${{ runner.temp }}/mouse645-admin-receipt.log
           if-no-files-found: ignore
           retention-days: 7
