@@ -1,0 +1,33 @@
+name: Verify Japan AJ PW numeric-coercion candidate
+on:
+  push:
+    branches: [fix/japan-aj-pw-multiply-20261128]
+    paths:
+      - 'apps/web/lib/catalog/japan-source-power-query.ts'
+      - 'tests/japan-source-power-query.test.ts'
+      - '.github/workflows/japan-aj-pw-multiply-candidate.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/fix/japan-aj-pw-multiply-20261128'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.22.3'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Compare numeric PW semantics and check Japan catalog selection
+        run: |
+          node --import tsx --test tests/japan-source-power-query.test.ts tests/japan-source-power.test.ts tests/ajes-query-stability.test.ts
+          npm run typecheck
+      - name: Show exact candidate identity
+        run: |
+          git rev-parse HEAD
+          git rev-parse HEAD^{tree}
+          node -e "const fs=require('fs');const s=fs.readFileSync('apps/web/lib/catalog/japan-source-power-query.ts','utf8');if(s.includes('pw+0') || (s.match(/pw[*]1/g)||[]).length!==3)throw Error('power numeric coercion mismatch')"
